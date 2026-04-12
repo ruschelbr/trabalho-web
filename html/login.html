@@ -12,42 +12,54 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
+        rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
-    <header class="header p-4 w-100 d-flex align-items-center">
-        <a href="index.html" class="me-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
-        <a href="" class="mx-5 texto-claro links-animacao links-header">Discografia</a>
-        <a href="" class="mx-5 texto-claro links-animacao links-header">Sobre</a>
-        <a href="" class="mx-5 texto-claro links-animacao links-header">Contato</a>
-        <a href="login.html" class="ms-auto me-5 texto-claro links-animacao links-header">Login</a>
+    <header class="header py-4 px-5 w-100 d-flex align-items-center inter">
+        <a href="index.html" class="me-xs-1 me-se-3 me-lg-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
+        <a href="" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
+        <a href="" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Sobre</a>
+        <a href="" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Contato</a>
+        <a href="login.html" class=" ms-auto me-xs-1 me-sm-3 me-lg-5 texto-claro links-animacao links-header">Login</a>
     </header>
 
-    <form id="form-login" method="post">
+    <form id="form-login" method="post" class="inter">
         <div id="login" class="container d-flex flex-column align-items-center justify-content-center">
-            <div class="row p-5">
-                <p class="my-3 nome-formulario texto-escuro">Login</p>
+            <div class="row py-0 px-5 google-sans">
+                <p class="my-3 nome-formulario texto-escuro ">Login</p>
             </div>
-            <div class="row p-5">
+            <div class="row py-4 px-5">
                 <label for="email" class="my-3 texto-escuro">Email:</label>
-                <input type="email" name="email" id="email" class="form-input">
+                <input type="email" name="email" id="email" class="form-input linha-form">
             </div>
-            <div class="row p-5">
+            <div class="row py-4 px-5">
                 <label for="senha" class="my-3 texto-escuro">Senha:</label>
-                <input type="password" name="senha" id="senha" class="form-input">
+                <input type="password" name="senha" id="senha" class="form-input linha-form">
             </div>
-            <div class="row p-5">
+            <div class="row py-4 px-5">
                 <div class="col d-flex align-items-center gap-2">
-                    <input type="checkbox" name="lembrar" id="lembrar" class="checkbox">
+                    <input type="checkbox" name="lembrar" id="lembrar" class="checkbox linha-form">
                     <label for="lembrar" class="texto-escuro">Lembrar-me</label>
                 </div>
             </div>
-            <div class="row p-5">
-                <button class="btn mx-auto">Entrar</button>
+            <div class="row py-4 px-5">
+                <button class="btn mx-auto linha-form">Entrar</button>
             </div>
         </div>
 
-        <div class="p-5 registrar d-flex">
+        <div class="py-4 px-5 registrar d-flex justify-content-center">
             <div>
                 <label class="texto-claro">Não tem uma conta?</label>
                 <a href="cadastro.html" class="links-animacao link-registrar mx-4">Registre-se</a>
@@ -56,27 +68,28 @@
     </form>
 
 
-    <footer>
+    <footer class="google-sans">
         <div class="footer-conteudo">
             <div class="footer-esquerda">
                 <p class="footer-logo">SPLIPPLEMAN</p>
                 <div class="footer-icons d-flex align-items-center">
-                    <a href="#" class="footer-icon me-3">
+                    <a href="https://open.spotify.com/intl-pt/artist/4dQ2640iVoRcfgmMW0BThy?si=JqEAwcLiSGq9XfVgV_EjuQ"
+                        class="footer-icon me-3">
                         <img src="../img/spotify.png" alt="Spotify">
                     </a>
-                    <a href="#" class="footer-icon me-3">
+                    <a href="https://www.youtube.com/user/splippleman" class="footer-icon me-3">
                         <img src="../img/youtube.png" alt="youtube">
                     </a>
-                    <a href="#" class="footer-icon">
+                    <a href="https://www.instagram.com/splippleman/" class="footer-icon">
                         <img src="../img/instagram_512.png" alt="Instagram">
                     </a>
                 </div>
             </div>
-            <div class="footer-direita">
-                <img src="../img/logo.jpg" alt="Splippleman" class="footer-logo">
+            <div class="footer-direita ">
+                <img src="../img/icon-rodape.png" alt="Splippleman" class="footer-logo">
             </div>
         </div>
-        <div class="footer-copy">
+        <div class="footer-copy mt-5">
             <p>© 2026 Todos os direitos reservados</p>
         </div>
     </footer>
