@@ -3,6 +3,7 @@ body {
     min-height: 100vh;
 }
 
+/* cabeçalho */
 .header {
     top: 0;
     position: fixed;
@@ -59,6 +60,18 @@ body {
     color: #FCE829;
 }
 
+/* formularios */
+
+.nome-formulario {
+    font-size: clamp(2rem, 6vw, 6rem) !important;
+    font-weight: bolder;
+}
+
+.texto-escuro {
+    text-decoration: none;
+    color: #191918;
+}
+
 #form-login {
     margin: 25vh 35vw 25vh 35vw;
     background-color: #FFFCFF;
@@ -75,8 +88,8 @@ form label {
 
 }
 
-.form-texto {
-    width: clamp(200px, 25vw, 35vw) !important;
+.form-input {
+    width: clamp(100px, 25vw, 30vw) !important;
     display: block;
     border: none;
     border-radius: 40rem;
@@ -93,6 +106,15 @@ form label {
     /* outline: 0.2px solid rgba(25, 25, 24, 0.11);
     box-shadow: 0.5px 1px 0.5px rgba(0, 0, 0, 0.25); */
     /* não consegui colocar o box-shadow direito nesse */
+}
+
+.dropdown-form{
+    width: clamp(100px, 25vw, 30vw) !important;
+    border: none;
+    border-radius: 40rem;
+    background-color: #ECECEC;
+     outline: 2px solid rgba(25, 25, 24, 0.11);
+    box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .btn {
@@ -120,6 +142,8 @@ form label {
     position: relative;
 }
 
+
+/* rodapé */
 footer {
     background-color: #191918;
     padding: 2rem 3rem 1rem;
