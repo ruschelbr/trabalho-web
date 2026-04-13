@@ -135,7 +135,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end; /* 🔥 chave do alinhamento */
+  align-items: flex-end;
 }
 
 /* texto esquerda */
@@ -238,7 +238,7 @@ body {
 .container-sobre-3 {
   background-color: #fffcff;
   display: flex;
-  flex-direction: column; /* 🔥 coluna (uma linha em cima, outra embaixo) */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 80vh;
