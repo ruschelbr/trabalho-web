@@ -20,6 +20,7 @@ body {
     color: #FFFCFF;
     min-height: 10vh;
     min-width: 100%;
+    z-index: 1000;
 }
 
 .header>a img {
