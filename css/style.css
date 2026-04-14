@@ -90,7 +90,7 @@ body {
     min-height: 30vh;
     border-radius: 57px;
     outline: 2px solid rgba(25, 25, 24, 0.11);
-    box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.664);
 }
 
 form label {
@@ -153,7 +153,9 @@ form label {
 
 .registrar {
     background-color: #191918;
+    /* background-color: black; */
     border-radius: 0px 0px 50px 50px;
+
 }
 
 .link-registrar {
