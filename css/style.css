@@ -89,8 +89,6 @@ body {
     background-color: #FFFCFF;
     min-height: 30vh;
     border-radius: 57px;
-
-
     outline: 2px solid rgba(25, 25, 24, 0.11);
     box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
 }
@@ -110,9 +108,12 @@ form label {
     box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
 }
 
+.linha-form {
+    transition: box-shadow 0.3s ease-in-out
+}
+
 .linha-form:hover {
     box-shadow: 2px 4px 10px #2B9CCC;
-
 }
 
 .checkbox {
@@ -120,6 +121,8 @@ form label {
     border: none;
     border-radius: 40rem;
     background-color: #ECECEC;
+    transition: box-shadow 0.3s ease-in-out;
+
     /* outline: 0.2px solid rgba(25, 25, 24, 0.11);
     box-shadow: 0.5px 1px 0.5px rgba(0, 0, 0, 0.25); */
     /* não consegui colocar o box-shadow direito nesse */
@@ -141,11 +144,11 @@ form label {
     border: none;
     outline: 2px solid #E9D51B;
     box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease-in-out !important;
 }
 
 .btn:hover {
     transform: scale(1.06);
-
 }
 
 .registrar {
