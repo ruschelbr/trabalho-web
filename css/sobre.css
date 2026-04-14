@@ -16,13 +16,6 @@ body {
   align-items: center;
 }
 
-.container-sobre-1 {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .box-central {
   background-color: #fffcff;
   padding: 40px 60px;
@@ -39,6 +32,13 @@ body {
 
   width: clamp(300px, 80%, calc(100% - 100px));
   margin: 0 auto;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.box-central:hover {
+  transform: scale(1.015);
+  box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.137);
 }
 
 #container-sobre-1-p1,
@@ -253,14 +253,53 @@ body {
   font-size: 5.5rem;
   text-shadow: 0px 4px 4px #0000003f;
   font-size: clamp(3rem, 5.5vw, 5.5rem);
+  margin-top: 0;
+  line-height: 1;
+
+  transition: transform 0.3s ease;  
 }
+
+.titulo-sobre-3:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.animacao-titulo-sobre-3 {
+    position: relative;
+}
+
+.animacao-titulo-sobre-3::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.3vh;
+    border-radius: 0.3vh;
+    background-color: #2B9CCC;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+.animacao-titulo-sobre-3:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
 
 .texto-e-imagem-sobre-3 {
   display: flex;
-  gap: 100px;
   justify-content: center;
   margin-bottom: 10%;
   flex-wrap: wrap;
+
+  column-gap: 100px;
+  row-gap: 30px;
+  
+  width: 100%;
+  max-width: 1600px; 
+
 }
 
 #texto-sobre-3 {
@@ -290,6 +329,12 @@ body {
   height: auto;
   border-radius: 20px;
   filter: sepia(0.6) saturate(1) hue-rotate(+10deg);
+
+  transition: transform 0.3s ease;
+}
+
+#img-membros-da-banda:hover {
+  transform: scale(1.015);
 }
 
 .texto-e-imagem-sobre-3 > div {
@@ -306,6 +351,6 @@ body {
 
 @media (max-width: 768px) {
   .texto-e-imagem-sobre-3 {
-  gap: 50px;
+  gap: 30px;
   }
 }

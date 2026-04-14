@@ -1,0 +1,301 @@
+body {
+  overflow-x: hidden;
+}
+
+/* container 1 */ /* container 1 */ /* container 1 */ /* container 1 */ /* container 1 */
+
+.container-home-1 {
+  position: relative;
+  background-color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  margin-top: 123px; /* header não fica sobre o container */
+}
+
+.img-home-1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  opacity: 0.65;
+}
+
+#img-splippleman-abbey-road {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* CLASSE BASE ATUALIZADA */
+.texto-home-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  text-align: center;
+  color: #fffcff;
+  z-index: 2;
+  
+  /* animação */
+  transition: transform 0.2s ease-in-out; 
+}
+
+/* animação */
+.texto-home-1:hover {
+  /* animação: translate --> para não sair do lugar; scale(1.1) --> cresce 10% */
+  transform: translate(-50%, -30%) scale(1.05); 
+  cursor: default; /* Garante que o mouse fique com a setinha normal */
+}
+
+#container-home-1-this-is {
+    font-family: "Bigshot One", cursive !important;
+    font-size: clamp(2.0rem, 3.5vw, 3.5rem);
+    text-shadow: 0px 2px 4px #00000083;
+    color: #fffcffb0 !important;
+ 
+    margin-bottom: 0 !important;
+    line-height: 0.8;
+}
+
+#container-home-1-splippleman {
+    font-family: "BBH Hegarty", cursive !important;
+    font-size: clamp(3.5rem, 5.8vw, 5.8rem);
+    text-shadow: 1px 6px 4px #00000077;
+    -webkit-text-stroke: 2px #FCE829;
+
+    margin-top: 0;
+    line-height: 1;
+}
+
+.animacao-splippleman-home-1 {
+    position: relative;
+}
+
+.animacao-splippleman-home-1::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.3vh;
+    border-radius: 0.3vh;
+    background-color: #2B9CCC;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+.animacao-splippleman-home-1:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+
+
+
+
+
+
+/* container 2 */ /* container 2 */ /* container 2 */ /* container 2 */ /* container 2 */
+
+.container-home-2 {
+  background-color: #191918;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 60vh;
+  padding: 80px 0;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 50%;
+  max-width: 700px;
+}
+
+/* CARROSSEL */
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+.carousel-inner {
+  border-radius: 30px;
+  overflow: visible;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.carousel-inner:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.733); 
+  cursor: pointer; /* muda cursor pra "mãozinha" */
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 30px;
+  opacity: 0.9;
+}
+
+/* posicionamento das setas */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  opacity: 0.8;
+}
+
+.carousel-control-prev {
+  left: -110px !important;
+}
+
+.carousel-control-next {
+  right: -110px !important;
+}
+
+.carousel-indicators {
+  bottom: -70px !important;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .carousel-control-prev {
+    left: -80px !important; 
+  }
+
+  .carousel-control-next {
+    right: -80px !important;
+  }
+
+  .carousel-indicators {
+    bottom: -60px !important;
+  }
+}
+
+
+
+
+
+
+
+
+/* container 3 */ /* container 3 */ /* container 3 */ /* container 3 */ /* container 3 */
+.container-home-3 {
+  background-color: #fffcff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  width: 100%;
+  padding: 60px 0;
+}
+
+.titulo-home-3 {
+  position: relative;
+  margin-bottom: 100px;
+  font-family: "Bigshot One", cursive !important;
+  text-shadow: 0px 4px 4px #0000003f;
+  font-size: clamp(3rem, 5.8vw, 5.8rem);
+  text-align: center;
+
+  transition: transform 0.3s ease;
+}
+
+.titulo-home-3:hover {
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.titulo-home-3::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0.3vh;
+    border-radius: 0.3vh;
+    background-color: #2B9CCC;
+    bottom: 0;
+    left: 0;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .3s ease-in-out;
+}
+
+.titulo-home-3:hover::before {
+    transform-origin: left;
+    transform: scaleX(1);
+}
+
+.texto-e-imagem-home-3 {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; 
+  
+  column-gap: 120px;
+  row-gap: 20px;
+  
+  width: 100%;
+  max-width: 1600px; 
+}
+
+.box-home-3 {
+  background-color: #fffcff;
+  border-radius: 30px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+  
+  padding: 60px 40px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  gap: 20px;
+  margin-bottom: 75px;
+  width: clamp(300px, 22vw, 450px);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.box-home-3:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 0px 35px rgba(0, 0, 0, 0.158);
+  cursor: pointer; /* muda cursor pra "mãozinha" */
+}
+
+.img-icones-home-3 {
+  width: 100%;
+  max-width: 75px;
+  height: auto;
+  object-fit: contain;
+}
+
+.texto-home-3 {
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+  font-family: "Google Sans Flex" !important;
+  padding-top: 10px;
+}
+
+@media (max-width: 992px) {
+  .texto-e-imagem-home-3 {
+    gap: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .texto-e-imagem-home-3 {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+}
