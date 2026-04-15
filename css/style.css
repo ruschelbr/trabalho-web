@@ -73,7 +73,7 @@ body {
 /* formularios */
 
 .nome-formulario {
-    font-size: clamp(1rem, 4vw, 4rem) !important;
+    font-size: clamp(0.7rem, 3.7vw, 3.7rem) !important;
     font-weight: bolder;
     text-shadow: 0.2px 1px 4px #191918;
 
@@ -112,7 +112,8 @@ form label {
     transition: box-shadow 0.3s ease-in-out
 }
 
-.linha-form:hover {
+.linha-form:hover,
+.linha-form:focus-within {
     box-shadow: 2px 4px 10px #2B9CCC;
 }
 
