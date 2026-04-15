@@ -1,0 +1,117 @@
+body {
+    overflow-x: hidden;
+}
+ 
+.bloco-album {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    padding: 50px 80px;
+    min-height: 280px;
+}
+ 
+.bloco-claro {
+    background-color: #fffcff;
+}
+ 
+.bloco-escuro {
+    background-color: #1f1f1f;
+}
+ 
+.linha-lateral {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+}
+ 
+.linha-azul {
+    background-color: #2B9CCC;
+}
+ 
+.linha-amarela {
+    background-color: #FCE829;
+}
+ 
+.album-capa-wrap {
+    flex: 0 0 auto;
+}
+ 
+.capa-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+    display: block;
+ 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+ 
+.capa-img:hover {
+    transform: scale(1.04);
+    box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.45);
+    cursor: pointer;
+}
+ 
+.album-info {
+    flex: 1;
+}
+ 
+.album-titulo {
+    font-family: "Bitter", serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2vw, 2rem);
+    margin-bottom: 16px;
+}
+ 
+.titulo-azul {
+    color: #2B9CCC;
+}
+ 
+.titulo-amarelo {
+    color: #FCE829;
+}
+ 
+.album-tracklist {
+    list-style: decimal;
+    padding-left: 20px;
+    margin: 0;
+    font-family: "Google Sans Flex", sans-serif;
+    font-size: clamp(0.78rem, 1vw, 0.95rem);
+    line-height: 1.85;
+    column-count: 2;
+    column-gap: 40px;
+}
+ 
+.tracklist-escuro {
+    color: #191918;
+}
+ 
+.tracklist-claro {
+    color: #fffcff;
+}
+
+.bloco-album:first-of-type {
+    margin-top: 123px; 
+}
+ 
+@media (max-width: 768px) {
+    .bloco-album {
+        flex-direction: column !important;
+        align-items: flex-start;
+        padding: 40px 30px 40px 36px;
+        gap: 24px;
+    }
+ 
+    .album-tracklist {
+        column-count: 1;
+    }
+ 
+    .capa-img {
+        width: 130px;
+        height: 130px;
+    }
+}

@@ -266,3 +266,9 @@ footer {
     font-size: clamp(0.65rem, 0.9vw, 0.85rem);
     margin: 0;
 }
+
+.textarea-contato {
+    border-radius: 20px !important;
+    resize: vertical;
+    min-height: 130px;
+}
