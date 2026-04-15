@@ -167,6 +167,103 @@ form label {
 }
 
 
+/* adicionar música e animações */
+.musica-item {
+    border-left: 3px solid rgba(25, 25, 24, 0.15);
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.musica-item:focus-within {
+    border-left-color: #2B9CCC;
+}
+
+/* cabeçalho da música (número + botão remover) */
+.musica-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.musica-numero {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(25, 25, 24, 0.4);
+}
+
+/* botão × remover — discreto, fica vermelho no hover */
+.btn-remover {
+    background: none;
+    border: none;
+    color: rgba(25, 25, 24, 0.25);
+    font-size: 1.3rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.btn-remover:hover {
+    color: #e55;
+}
+
+/* ── botão "+ Adicionar música" ───────────────────────── */
+.btn-adicionar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: clamp(100px, 25vw, 30vw);
+    /* mesma largura dos inputs */
+    margin: 0.5rem 0 0 0;
+    padding: 0.45rem 1.2rem;
+    background: none;
+    border: 2px dashed rgba(25, 25, 24, 0.25);
+    border-radius: 40rem;
+    /* mesmo border-radius do .form-input */
+    color: rgba(25, 25, 24, 0.5);
+    font-size: clamp(0.75rem, 1vw, 1rem);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out,
+        color 0.3s ease-in-out,
+        box-shadow 0.3s ease-in-out;
+}
+
+.btn-adicionar:hover {
+    border-color: #2B9CCC;
+    color: #191918;
+    box-shadow: 2px 4px 10px #2B9CCC;
+}
+
+.btn-adicionar .icone-mais {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+/* ── animação de entrada ─────────────────────────────── */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.musica-item.nova {
+    animation: slideIn 0.25s ease forwards;
+}
+
+
 /* rodapé */
 footer {
     position: relative;

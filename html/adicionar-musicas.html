@@ -19,42 +19,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Bitter&family=Bigshot+One&display=swap" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
 
+    <script src="../js/form.js" defer></script>
 </head>
 
 <body>
     <header class="header py-4 px-5 w-100 d-flex align-items-center inter">
         <a href="index.html" class="me-xs-1 me-se-3 me-lg-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
-        <a href="discografia.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
+        <a href="discografia.html"
+            class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
         <a href="sobre.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Sobre</a>
         <a href="contato.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Contato</a>
-        <a href="cadastrar-album.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Cadastrar álbum</a>
-        <a href="login.html" class=" ms-auto me-xs-1 me-sm-3 me-lg-5 texto-claro links-animacao links-header">Login</a>
+        <a href="cadastrar-album.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Cadastrar
+            álbum</a>
+        <a href="login.html" class="ms-auto me-xs-1 me-sm-3 me-lg-5 texto-claro links-animacao links-header">Login</a>
     </header>
 
     <form id="form-login" method="post" class="inter" action="index.html">
         <div id="login" class="container d-flex flex-column align-items-center justify-content-center">
+
             <div class="row py-0 px-5 google-sans text-center">
                 <p class="my-3 nome-formulario texto-escuro" style="white-space: nowrap;">Adicionar Músicas</p>
-                <p class="texto-escuro mt-0 mb-3" style="font-size: 1.2rem;">Álbum: <span
-                        style="font-weight: normal;">Nome do Álbum</span></p>
+                <p class="texto-escuro mt-0 mb-3" style="font-size: 1.2rem;">
+                    Álbum: <span style="font-weight: normal;">Nome do Álbum</span>
+                </p>
             </div>
 
-            <div class="row py-4 px-5">
-                <label for="mensagem" class="my-3 texto-escuro">Tracklist: (Digite uma música por linha):</label>
-                <textarea name="mensagem" id="mensagem" class="form-input linha-form textarea-contato" rows="5"
-                    placeholder=" &#10;X-Ray Riff Machine&#10;Feel Sorry&#10;The lady is Going Down"></textarea>
+            <div id="lista-musicas" class="row px-5">
+            </div>
+
+            <div class="row px-5 mt-1">
+                <button type="button" class="btn-adicionar inter" id="btn-adicionar" onclick="adicionarMusica()">
+                    <span class="icone-mais">+</span>
+                    Adicionar música
+                </button>
             </div>
 
             <div class="row py-4 px-5">
                 <button type="submit" class="btn mx-auto linha-form">Publicar Álbum</button>
             </div>
+
         </div>
     </form>
 
@@ -75,7 +82,7 @@
                     </a>
                 </div>
             </div>
-            <div class="footer-direita ">
+            <div class="footer-direita">
                 <img src="../img/icon-rodape.png" alt="Splippleman" class="footer-logo">
             </div>
         </div>
