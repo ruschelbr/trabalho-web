@@ -167,7 +167,6 @@ form label {
 }
 
 
-/* adicionar música e animações */
 .musica-item {
     border-left: 3px solid rgba(25, 25, 24, 0.15);
     padding-left: 1.2rem;
@@ -179,7 +178,6 @@ form label {
     border-left-color: #2B9CCC;
 }
 
-/* cabeçalho da música (número + botão remover) */
 .musica-cabecalho {
     display: flex;
     align-items: center;
@@ -195,7 +193,6 @@ form label {
     color: rgba(25, 25, 24, 0.4);
 }
 
-/* botão × remover — discreto, fica vermelho no hover */
 .btn-remover {
     background: none;
     border: none;
@@ -211,20 +208,17 @@ form label {
     color: #e55;
 }
 
-/* ── botão "+ Adicionar música" ───────────────────────── */
 .btn-adicionar {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     width: clamp(100px, 25vw, 30vw);
-    /* mesma largura dos inputs */
     margin: 0.5rem 0 0 0;
     padding: 0.45rem 1.2rem;
     background: none;
     border: 2px dashed rgba(25, 25, 24, 0.25);
     border-radius: 40rem;
-    /* mesmo border-radius do .form-input */
     color: rgba(25, 25, 24, 0.5);
     font-size: clamp(0.75rem, 1vw, 1rem);
     font-family: inherit;
@@ -246,7 +240,6 @@ form label {
     line-height: 1;
 }
 
-/* ── animação de entrada ─────────────────────────────── */
 @keyframes slideIn {
     from {
         opacity: 0;
