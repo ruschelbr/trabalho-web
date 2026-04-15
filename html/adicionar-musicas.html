@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
+    <title>Adicionar Músicas</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
 
     <!-- bootstrap: -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -17,63 +18,42 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bitter&family=Bigshot+One&display=swap" rel="stylesheet">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bitter&family=Bigshot+One&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
-
     <header class="header py-4 px-5 w-100 d-flex align-items-center inter">
         <a href="index.html" class="me-xs-1 me-se-3 me-lg-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
-        <a href="discografia.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
+        <a href="" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
         <a href="sobre.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Sobre</a>
-        <a href="contato.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Contato</a>
+        <a href="" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Contato</a>
         <a href="login.html" class=" ms-auto me-xs-1 me-sm-3 me-lg-5 texto-claro links-animacao links-header">Login</a>
     </header>
 
-    <form id="form-login" method="post" class="inter">
-        <div id="login" class="container d-flex flex-column align-items-center justify-content-center">
-            <div class="row py-0 px-5">
-                <p class="my-3 nome-formulario texto-escuro">Cadastro</p>
+    <div class="form-container-wrapper d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 15vh; padding-bottom: 5vh;">
+        <form class="form-admin inter d-flex flex-column align-items-center justify-content-center" action="index.html">
+            <div class="row py-0 px-5 google-sans mb-4">
+                <h1 class="nome-formulario texto-escuro text-center">Adicionar Músicas</h1>
+                <h3 class="texto-escuro text-center mt-2" style="font-size: 1.2rem;">Álbum: <span style="font-weight: normal;">Nome do Álbum</span></h3>
             </div>
-            <div class="row py-4 px-5">
-                <label for="nome" class="my-3 texto-escuro">Nome:</label>
-                <input type="text" name="nome" id="nome" class="form-input linha-form">
+            
+            <div class="form-group w-100 px-5 mb-5 flex-grow-1 d-flex flex-column">
+                <label for="tracklist" class="texto-escuro fw-bold mb-3 d-block">Tracklist: (Digite uma música por linha)</label>
+                <textarea name="tracklist" id="tracklist" class="form-input tracklist-input linha-form w-100 p-4 flex-grow-1" style="min-height: 250px; resize: none; font-weight: bold; color: #191918;" placeholder="Intro&#10;X-Ray Riff Machine&#10;Feel Sorry&#10;The lady is Going Down"></textarea>
             </div>
-            <div class="row py-4 px-5">
-                <label for="email" class="my-3 texto-escuro">Email:</label>
-                <input type="email" name="email" id="email" class="form-input linha-form">
+            
+            <div class="row py-4 px-5 w-100 d-flex justify-content-center mt-auto">
+                <button type="submit" class="btn fw-bold py-2 px-4 linha-form" style="width: auto !important; min-width: 200px;">Publicar Álbum</button>
             </div>
-            <div class="row py-4 px-5">
-                <label for="senha" class="my-3 texto-escuro">Senha:</label>
-                <input type="password" name="senha" id="senha" class="form-input linha-form">
-            </div>
-            <div class="row py-4 px-5">
-                <label for="album" class="my-3 texto-escuro">Álbum favorito:</label>
-                <select name="album" id="album" class="dropdown-form linha-form">
-                    <option value="sunset">Splippleman at Sunset Sound... Lost, Now Found</option>
-                    <option value="night">Still Night Blue</option>
-                    <option value="magic">Welcome to the Magic Room</option>
-                </select>
-            </div>
-            <div class="row py-4 px-5">
-                <label for="perfil" class="my-3 texto-escuro">Foto de perfil:</label>
-                <input type="file" name="perfil" id="perfil" class="form-input linha-form">
-            </div>
-
-            <div class="row py-4 px-5">
-                <button class="btn mx-auto linha-form">Cadastrar</button>
-            </div>
-        </div>
-
-
-    </form>
+        </form>
+    </div>
 
     <footer class="google-sans">
         <div class="footer-conteudo">
@@ -100,7 +80,6 @@
             <p>© 2026 Todos os direitos reservados</p>
         </div>
     </footer>
-
 </body>
 
 </html>
