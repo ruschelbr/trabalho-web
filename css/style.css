@@ -272,3 +272,7 @@ footer {
     resize: vertical;
     min-height: 130px;
 }
+
+#img-instagram {
+    transform: scale(1.2);
+}
