@@ -84,7 +84,7 @@ body {
     color: #191918;
 }
 
-#form-login {
+#caixa-branca {
     margin: 25vh 35vw 25vh 35vw;
     background-color: #FFFCFF;
     min-height: 30vh;
@@ -257,6 +257,17 @@ form label {
 }
 
 
+
+
+#perfil img {
+    border-radius: 100%;
+    width: 50%;
+    /* object-fit: cover; */
+    min-width: 3vw;
+    /* max-width: 30px; */
+    margin: 0 auto; /* Esta é a linha mágica que centraliza a imagem */
+}
+
 /* rodapé */
 footer {
     position: relative;
@@ -339,7 +350,8 @@ footer {
 }
 
 .textarea-contato {
-    border-radius: 20px !important;  /* textarea precisa de border-radius menor que inputs */
+    border-radius: 20px !important;
+    /* textarea precisa de border-radius menor que inputs */
     resize: vertical;
     min-height: 130px;
 }
