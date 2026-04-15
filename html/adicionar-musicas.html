@@ -30,10 +30,11 @@
 
 <body>
     <header class="header py-4 px-5 w-100 d-flex align-items-center inter">
-        <a href="homepage.html" class="me-xs-1 me-se-3 me-lg-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
+        <a href="index.html" class="me-xs-1 me-se-3 me-lg-5"><img src="../img/logo.jpg" alt="Splippleman"></a>
         <a href="discografia.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Discografia</a>
         <a href="sobre.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Sobre</a>
         <a href="contato.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Contato</a>
+        <a href="cadastrar-album.html" class="mx-xs-1 mx-sm-3 mx-lg-5 texto-claro links-animacao links-header">Cadastrar álbum</a>
         <a href="login.html" class=" ms-auto me-xs-1 me-sm-3 me-lg-5 texto-claro links-animacao links-header">Login</a>
     </header>
 
@@ -41,16 +42,18 @@
         <div id="login" class="container d-flex flex-column align-items-center justify-content-center">
             <div class="row py-0 px-5 google-sans text-center">
                 <p class="my-3 nome-formulario texto-escuro" style="white-space: nowrap;">Adicionar Músicas</p>
-                <p class="texto-escuro mt-0 mb-3" style="font-size: 1.2rem;">Álbum: <span style="font-weight: normal;">Nome do Álbum</span></p>
+                <p class="texto-escuro mt-0 mb-3" style="font-size: 1.2rem;">Álbum: <span
+                        style="font-weight: normal;">Nome do Álbum</span></p>
             </div>
-            
-            <div class="row py-4 px-5 w-100">
-                <label for="tracklist" class="my-3 texto-escuro">Tracklist: (Digite uma música por linha)</label>
-                <textarea name="tracklist" id="tracklist" class="form-input tracklist-input linha-form p-4" style="min-height: 250px; resize: none; font-weight: bold; color: #191918; width: 100% !important; border-radius: 20px;" placeholder="Intro&#10;X-Ray Riff Machine&#10;Feel Sorry&#10;The lady is Going Down"></textarea>
-            </div>
-            
+
             <div class="row py-4 px-5">
-                <button type="submit" class="btn mx-auto linha-form" style="width: auto !important; min-width: 200px;">Publicar Álbum</button>
+                <label for="mensagem" class="my-3 texto-escuro">Tracklist: (Digite uma música por linha):</label>
+                <textarea name="mensagem" id="mensagem" class="form-input linha-form textarea-contato" rows="5"
+                    placeholder=" &#10;X-Ray Riff Machine&#10;Feel Sorry&#10;The lady is Going Down"></textarea>
+            </div>
+
+            <div class="row py-4 px-5">
+                <button type="submit" class="btn mx-auto linha-form">Publicar Álbum</button>
             </div>
         </div>
     </form>

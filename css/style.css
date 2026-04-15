@@ -73,7 +73,7 @@ body {
 /* formularios */
 
 .nome-formulario {
-    font-size: clamp(0.7rem, 3.7vw, 3.7rem) !important;
+    font-size: clamp(0.5rem, 3.5vw, 3.5rem) !important;
     font-weight: bolder;
     text-shadow: 0.2px 1px 4px #191918;
 
