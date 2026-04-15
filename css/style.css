@@ -337,3 +337,9 @@ footer {
 #img-instagram {
     transform: scale(1.25);
 }
+
+.textarea-contato {
+    border-radius: 20px !important;  /* textarea precisa de border-radius menor que inputs */
+    resize: vertical;
+    min-height: 130px;
+}
