@@ -11,28 +11,23 @@ body {
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  height: 100vh;
+  
   justify-content: center;
-  align-items: center;
+
+  padding-top: 120px !important; 
+  padding-bottom: 60px !important;
 }
 
 .box-central {
   background-color: #fffcff;
   padding: 40px 60px;
   border-radius: 20px;
-
   max-width: 1500px;
-  margin: 0 auto;
-
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
   display: flex;
   flex-direction: column;
   gap: 20px;
-
   width: clamp(300px, 80%, calc(100% - 100px));
-  margin: 0 auto;
-
   transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
@@ -82,6 +77,25 @@ body {
   font-size: clamp(1.3rem, 1.8vw, 1.8rem) !important;
 }
 
+@media (max-width: 992px) {
+  .container-sobre-1 {
+    justify-content: flex-start !important; 
+  }
+
+  .box-central {
+    margin-top: 140px !important; 
+    margin-bottom: 50px !important;
+    
+    width: 90% !important; 
+    padding: 30px 20px !important;
+  }
+
+  .box-central .px-5 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
 
 
 
@@ -95,15 +109,13 @@ body {
 .container-sobre-2 {
   background-color: #19191860;
   position: relative;
-  height: 90vh;
-  padding-left: 100px;
-  padding-right: 0px;
+  padding: 80px 20px; 
 }
 
-/* padding-left só acima de 576px */
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .container-sobre-2 {
     padding-left: 100px;
+    padding-right: 0px;
   }
 }
 
@@ -195,6 +207,11 @@ body {
 
 /*se a tela for menor que tamanho medio:*/
 @media (max-width: 768px) {
+  .container-sobre-2 .container-fluid {
+    height: auto !important; 
+    align-items: flex-start !important;
+  }
+
   .linha-divisoria {
     display: none;
   }
@@ -202,9 +219,11 @@ body {
   .container-2-esquerda {
     align-items: center !important;
     text-align: center;
+    margin-top: 60px;
+    margin-bottom: 50px; 
   }
 
-  .texto-esquerda-splippleman {
+  #texto-esquerda-splippleman {
     width: 100%;
     display: flex;
     flex-direction: column;
