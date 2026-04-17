@@ -84,13 +84,27 @@ body {
     color: #191918;
 }
 
-#caixa-branca {
+/* #caixa-branca {
     margin: 25vh 35vw 25vh 35vw;
     background-color: #FFFCFF;
     min-height: 30vh;
     border-radius: 57px;
     outline: 2px solid rgba(25, 25, 24, 0.11);
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.664);
+} */
+
+#caixa-branca {
+    margin: 15vh auto;
+    width: 90%;
+    max-width: 500px;
+    background-color: #FFFCFF;
+    min-height: 30vh;
+    border-radius: 57px;
+    outline: 2px solid rgba(25, 25, 24, 0.11);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.664);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 form label {
@@ -99,7 +113,8 @@ form label {
 }
 
 .form-input {
-    width: clamp(100px, 25vw, 30vw) !important;
+    width: 100% !important;
+    padding: 0.5rem 1.2rem;
     display: block;
     border: none;
     border-radius: 40rem;
@@ -130,7 +145,7 @@ form label {
 }
 
 .dropdown-form {
-    width: clamp(100px, 25vw, 30vw) !important;
+    width: 100% !important;
     border: none;
     border-radius: 40rem;
     background-color: #ECECEC;
@@ -154,8 +169,8 @@ form label {
 
 .registrar {
     background-color: #191918;
-    /* background-color: black; */
     border-radius: 0px 0px 50px 50px;
+
 
 }
 
@@ -265,7 +280,8 @@ form label {
     /* object-fit: cover; */
     min-width: 3vw;
     /* max-width: 30px; */
-    margin: 0 auto; /* Esta é a linha mágica que centraliza a imagem */
+    margin: 0 auto;
+    /* Esta é a linha mágica que centraliza a imagem */
 }
 
 /* rodapé */
@@ -354,4 +370,10 @@ footer {
     /* textarea precisa de border-radius menor que inputs */
     resize: vertical;
     min-height: 130px;
+}
+
+@media (max-width: 768px) {
+    .header .links-header {
+        margin: 0 15px 0 15px !important;
+    }
 }
