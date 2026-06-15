@@ -177,16 +177,18 @@ body {
   gap: 100px;
 }
 
-/* img esquerda */
-.imagem-container-2 {
-  max-width: 20%;
+/* img esquerda — largura da coluna (evita conflito com ordem CSS do Vite) */
+.container-2-esquerda .imagem-container-2 {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   border-radius: 20px;
   margin-top: 20%;
+  align-self: flex-end;
 }
 
 .container-2-direita {
   color: #fffcff;
-  width: 100%;
 }
 
 /* texto direita */
