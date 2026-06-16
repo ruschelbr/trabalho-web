@@ -6,6 +6,8 @@ import Sobre from './pages/Sobre.jsx'
 import Contato from './pages/Contato.jsx'
 import Login from './pages/Login.jsx'
 import Cadastro from './pages/Cadastro.jsx'
+import Discografia from './pages/Discografia.jsx'
+import MusicaExemplo from './pages/MusicaExemplo.jsx'
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/discografia" element={<Discografia />} />
+        <Route path="/musica-exemplo" element={<MusicaExemplo />} />
         <Route path="/sobre" element={<Sobre />} />
         <Route path="/contato" element={<Contato />} />
         <Route path="/login" element={<Login />} />
