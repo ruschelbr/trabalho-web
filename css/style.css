@@ -167,6 +167,77 @@ form label {
     transform: scale(1.06);
 }
 
+/* layout padronizado dos formularios */
+.form-pagina {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-titulo {
+    padding: 1rem 1.5rem 0.5rem;
+    text-align: center;
+}
+
+.form-titulo .nome-formulario {
+    margin: 0;
+}
+
+.form-campo {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-campo > label.texto-escuro,
+.form-campo > .form-upload-label {
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.form-acoes {
+    padding: 0.75rem 1.5rem 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-upload {
+    cursor: pointer;
+    display: block;
+}
+
+.form-subtitulo {
+    font-size: 1.2rem;
+    margin: 0.25rem 0 0;
+    font-weight: normal;
+}
+
+.form-perfil {
+    text-align: center;
+    width: 100%;
+}
+
+.form-perfil img,
+#perfil img {
+    border-radius: 100%;
+    width: 50%;
+    min-width: 3vw;
+    margin: 0 auto;
+    display: block;
+}
+
+.form-perfil .form-campo-dados {
+    padding: 0.75rem 1.5rem;
+}
+
+.form-perfil .form-campo-dados p {
+    margin: 0.5rem 0;
+}
+
+.form-campo .d-flex label.texto-escuro {
+    margin-bottom: 0;
+}
+
 .registrar {
     background-color: #191918;
     border-radius: 0px 0px 50px 50px;
@@ -269,19 +340,6 @@ form label {
 
 .musica-item.nova {
     animation: slideIn 0.25s ease forwards;
-}
-
-
-
-
-#perfil img {
-    border-radius: 100%;
-    width: 50%;
-    /* object-fit: cover; */
-    min-width: 3vw;
-    /* max-width: 30px; */
-    margin: 0 auto;
-    /* Esta é a linha mágica que centraliza a imagem */
 }
 
 /* rodapé */

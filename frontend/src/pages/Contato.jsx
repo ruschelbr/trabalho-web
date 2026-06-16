@@ -1,49 +1,33 @@
+import { FormPagina, FormTitulo, FormCampo, FormAcoes } from '../components/FormPagina.jsx'
+
 function Contato() {
   function handleSubmit(e) {
     e.preventDefault()
   }
 
   return (
-    <form
-      id="caixa-branca"
-      method="post"
-      className="inter"
-      onSubmit={handleSubmit}
-    >
-      <div className="container d-flex flex-column align-items-center justify-content-center">
-        <div className="row py-0 px-5">
-          <p className="my-3 nome-formulario texto-escuro">Contato</p>
-        </div>
-        <div className="row py-4 px-5">
-          <label htmlFor="nome" className="my-3 texto-escuro">
-            Nome:
-          </label>
-          <input type="text" name="nome" id="nome" className="form-input linha-form" />
-        </div>
-        <div className="row py-4 px-5">
-          <label htmlFor="email" className="my-3 texto-escuro">
-            Email:
-          </label>
-          <input type="email" name="email" id="email" className="form-input linha-form" />
-        </div>
-        <div className="row py-4 px-5">
-          <label htmlFor="mensagem" className="my-3 texto-escuro">
-            Mensagem:
-          </label>
-          <textarea
-            name="mensagem"
-            id="mensagem"
-            className="form-input linha-form textarea-contato"
-            rows={5}
-          ></textarea>
-        </div>
-        <div className="row py-4 px-5">
-          <button type="submit" className="btn mx-auto linha-form">
-            Enviar
-          </button>
-        </div>
-      </div>
-    </form>
+    <FormPagina onSubmit={handleSubmit}>
+      <FormTitulo>Contato</FormTitulo>
+      <FormCampo label="Nome:" htmlFor="nome-contato">
+        <input type="text" name="nome" id="nome-contato" className="form-input linha-form" />
+      </FormCampo>
+      <FormCampo label="Email:" htmlFor="email-contato">
+        <input type="email" name="email" id="email-contato" className="form-input linha-form" />
+      </FormCampo>
+      <FormCampo label="Mensagem:" htmlFor="mensagem-contato">
+        <textarea
+          name="mensagem"
+          id="mensagem-contato"
+          className="form-input linha-form textarea-contato"
+          rows={5}
+        />
+      </FormCampo>
+      <FormAcoes>
+        <button type="submit" className="btn linha-form">
+          Enviar
+        </button>
+      </FormAcoes>
+    </FormPagina>
   )
 }
 
