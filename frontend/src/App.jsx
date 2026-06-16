@@ -11,6 +11,7 @@ import MusicaExemplo from './pages/MusicaExemplo.jsx'
 import CadastrarAlbum from './pages/CadastrarAlbum.jsx'
 import Perfil from './pages/Perfil.jsx'
 import EditarPerfil from './pages/EditarPerfil.jsx'
+import AdicionarMusicas from './pages/AdicionarMusicas.jsx'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/cadastrar-album" element={<CadastrarAlbum />} />
+        <Route path="/adicionar-musicas" element={<AdicionarMusicas />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/editar-perfil" element={<EditarPerfil />} />
       </Routes>
