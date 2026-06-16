@@ -146,11 +146,24 @@ form label {
 
 .dropdown-form {
     width: 100% !important;
-    border: none;
-    border-radius: 40rem;
-    background-color: #ECECEC;
-    outline: 2px solid rgba(25, 25, 24, 0.11);
+    padding: 0.5rem 1.2rem !important;
+    border: none !important;
+    border-radius: 40rem !important;
+    background-color: #ECECEC !important;
+    outline: 2px solid rgba(25, 25, 24, 0.11) !important;
     box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+    cursor: pointer;
+    font-family: inherit;
+    color: #191918;
+}
+
+.dropdown-form:hover,
+.dropdown-form:focus,
+.dropdown-form:focus-visible {
+    box-shadow: 2px 4px 10px #2B9CCC !important;
 }
 
 .btn {
