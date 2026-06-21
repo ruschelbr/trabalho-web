@@ -146,11 +146,24 @@ form label {
 
 .dropdown-form {
     width: 100% !important;
-    border: none;
-    border-radius: 40rem;
-    background-color: #ECECEC;
-    outline: 2px solid rgba(25, 25, 24, 0.11);
+    padding: 0.5rem 1.2rem !important;
+    border: none !important;
+    border-radius: 40rem !important;
+    background-color: #ECECEC !important;
+    outline: 2px solid rgba(25, 25, 24, 0.11) !important;
     box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    appearance: auto !important;
+    -webkit-appearance: auto !important;
+    -moz-appearance: auto !important;
+    cursor: pointer;
+    font-family: inherit;
+    color: #191918;
+}
+
+.dropdown-form:hover,
+.dropdown-form:focus,
+.dropdown-form:focus-visible {
+    box-shadow: 2px 4px 10px #2B9CCC !important;
 }
 
 .btn {
@@ -165,6 +178,77 @@ form label {
 
 .btn:hover {
     transform: scale(1.06);
+}
+
+/* layout padronizado dos formularios */
+.form-pagina {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-titulo {
+    padding: 1rem 1.5rem 0.5rem;
+    text-align: center;
+}
+
+.form-titulo .nome-formulario {
+    margin: 0;
+}
+
+.form-campo {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-campo > label.texto-escuro,
+.form-campo > .form-upload-label {
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.form-acoes {
+    padding: 0.75rem 1.5rem 1.25rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-upload {
+    cursor: pointer;
+    display: block;
+}
+
+.form-subtitulo {
+    font-size: 1.2rem;
+    margin: 0.25rem 0 0;
+    font-weight: normal;
+}
+
+.form-perfil {
+    text-align: center;
+    width: 100%;
+}
+
+.form-perfil img,
+#perfil img {
+    border-radius: 100%;
+    width: 50%;
+    min-width: 3vw;
+    margin: 0 auto;
+    display: block;
+}
+
+.form-perfil .form-campo-dados {
+    padding: 0.75rem 1.5rem;
+}
+
+.form-perfil .form-campo-dados p {
+    margin: 0.5rem 0;
+}
+
+.form-campo .d-flex label.texto-escuro {
+    margin-bottom: 0;
 }
 
 .registrar {
@@ -269,19 +353,6 @@ form label {
 
 .musica-item.nova {
     animation: slideIn 0.25s ease forwards;
-}
-
-
-
-
-#perfil img {
-    border-radius: 100%;
-    width: 50%;
-    /* object-fit: cover; */
-    min-width: 3vw;
-    /* max-width: 30px; */
-    margin: 0 auto;
-    /* Esta é a linha mágica que centraliza a imagem */
 }
 
 /* rodapé */
