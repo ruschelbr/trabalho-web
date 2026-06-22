@@ -12,9 +12,9 @@ async function findAll(request, response) {
 
 async function findById(request, response) {
     try {
-        const result = await model.findByPk(request, response)
+        const result = await model.findByPk(request.params.id)
         if (result == null) {
-            response.status(404).send()
+            return response.status(404).send()
         }
         response.json(result).status(200)
     } 
@@ -80,7 +80,7 @@ async function findSongsOfAlbum(request, response) { //método que deve ser cham
             response.status(404).send()
         }
         else {
-            response.status(200).send()
+            response.json(result).status(200)
         }
     } catch (error) {
         console.log(error)
