@@ -1,16 +1,19 @@
 import model from "../models/comment.model.js"
 import User from "../models/user.model.js"
+import Song from "../models/song.model.js"
+import "../models/associations.js"
 
 // GET /songs/:songId/comments
 // Busca os comentários de uma música, já trazendo o nome/foto de quem comentou
 async function findBySong(request, response) {
   try {
+    const songId = parseInt(request.params.songId)
     const results = await model.findAll({
-      where: { songId: request.params.songId },
+      where: { SongId: songId },
       include: { model: User, attributes: ["id", "name", "profilePicture"] },
       order: [["createdAt", "DESC"]],
     })
-    response.json(results).status(200)
+    response.status(200).json(results)
   } catch (error) {
     console.log(error)
     response.status(500).send("Erro ao buscar comentários")
@@ -23,13 +26,15 @@ async function findBySong(request, response) {
 async function create(request, response) {
   try {
     if (!request.body.text || !request.body.text.trim()) {
-      return response.status(400).json({ message: "O comentário não pode estar vazio" })
+      return response
+        .status(400)
+        .json({ message: "O comentário não pode estar vazio" })
     }
 
     const created = await model.create({
       text: request.body.text,
-      songId: request.body.songId,
-      userId: request.userId,
+      SongId: request.body.SongId,
+      UserId: request.UserId,
     })
 
     // Busca de novo já incluindo os dados do usuário, pra devolver pronto pro front renderizar

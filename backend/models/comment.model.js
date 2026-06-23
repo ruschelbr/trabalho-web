@@ -1,7 +1,5 @@
 import { Model, Sequelize, DataTypes } from "sequelize"
 import sequelize from "./dbconfig.js"
-import Song from "./song.model.js"
-import User from "./user.model.js"
 
 class Comment extends Model {}
 
