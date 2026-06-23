@@ -59,7 +59,7 @@ router.get("/contacts", /*authController.validateToken*/ contactController.findA
 
 // Comments
 router.get("/songs/:songId/comments", commentController.findBySong)
-router.post("/comments", /*authController.validateToken*/ commentController.create)
-router.delete("/comments/:id", /*authController.validateToken*/ commentController.deleteById)
+router.post("/comments", authController.validateToken, commentController.create)
+router.delete("/comments/:id", authController.validateToken, commentController.deleteById)
 
 export default router
