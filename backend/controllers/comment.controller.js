@@ -21,8 +21,9 @@ async function findBySong(request, response) {
 }
 
 // POST /comments (autenticado)
-// O autor do comentário vem do token (request.userId), não do body --
-// assim ninguém comenta fingindo ser outro usuário
+// O autor do comentário vem do token (request.UserId, setado pelo
+// authController.validateToken), não do body -- assim ninguém comenta
+// fingindo ser outro usuário
 async function create(request, response) {
   try {
     if (!request.body.text || !request.body.text.trim()) {
@@ -31,10 +32,16 @@ async function create(request, response) {
         .json({ message: "O comentário não pode estar vazio" })
     }
 
+    if (!request.body.SongId) {
+      return response
+        .status(400)
+        .json({ message: "SongId é obrigatório" })
+    }
+
     const created = await model.create({
       text: request.body.text,
       SongId: request.body.SongId,
-      UserId: request.body.UserId
+      UserId: request.UserId
     })
 
     // Busca de novo já incluindo os dados do usuário, pra devolver pronto pro front renderizar
@@ -42,7 +49,7 @@ async function create(request, response) {
       include: { model: User, attributes: ["id", "name", "profilePicture"] },
     })
 
-    response.json(result).status(201)
+    response.status(201).json(result)
   } catch (error) {
     console.log(error)
     response.status(500).send("Erro ao criar comentário")
