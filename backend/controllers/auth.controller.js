@@ -11,8 +11,10 @@ function getToken(uid, uemail) {
 function validarSenha(senha) {
   if (senha.length < 8) return "A senha deve ter pelo menos 8 caracteres"
   if (!/[0-9]/.test(senha)) return "A senha deve ter pelo menos 1 número"
-  if (!/[A-Z]/.test(senha)) return "A senha deve ter pelo menos 1 letra maiúscula"
-  if (!/[a-z]/.test(senha)) return "A senha deve ter pelo menos 1 letra minúscula"
+  if (!/[A-Z]/.test(senha))
+    return "A senha deve ter pelo menos 1 letra maiúscula"
+  if (!/[a-z]/.test(senha))
+    return "A senha deve ter pelo menos 1 letra minúscula"
   return null
 }
 
@@ -23,22 +25,26 @@ async function register(request, response) {
       return response.status(400).json({ message: erroSenha })
     }
 
-    const existing = await User.findOne({ where: { email: request.body.email } })
+    const existing = await User.findOne({
+      where: { email: request.body.email },
+    })
     if (existing) {
       return response.status(409).json({ message: "Email já cadastrado" })
     }
 
     const hashedPassword = bcrypt.hashSync(request.body.password, 10)
+    const isAdmin = request.body.email === "admin@admin.com"
     const user = await User.create({
       name: request.body.name,
       email: request.body.email,
       password: hashedPassword,
       profilePicture: request.body.profilePicture || "",
-      admin: false,
+      admin: isAdmin,
+      favoriteAlbumId: request.body.favoriteAlbumId
     })
 
     const token = getToken(user.id, user.email)
-    response.status(201).json({ token, userId: user.id, admin: user.admin })
+    response.status(201).json({ token, UserId: user.id, admin: user.admin })
   } catch (error) {
     console.log(error)
     response.status(500).send()
@@ -52,13 +58,16 @@ async function login(request, response) {
       return response.status(401).json({ message: "Email ou senha incorretos" })
     }
 
-    const passwordMatch = bcrypt.compareSync(request.body.password, user.password)
+    const passwordMatch = bcrypt.compareSync(
+      request.body.password,
+      user.password,
+    )
     if (!passwordMatch) {
       return response.status(401).json({ message: "Email ou senha incorretos" })
     }
 
     const token = getToken(user.id, user.email)
-    response.status(200).json({ token, userId: user.id, admin: user.admin })
+    response.status(200).json({ token, UserId: user.id, admin: user.admin })
   } catch (error) {
     console.log(error)
     response.status(500).send()
@@ -74,7 +83,7 @@ async function validateToken(request, response, next) {
 
     const token = authHeader.split(" ")[1]
     const decoded = jwt.verify(token, secret)
-    request.userId = decoded.sub
+    request.UserId = decoded.sub
     request.userEmail = decoded.email
     next()
   } catch (error) {

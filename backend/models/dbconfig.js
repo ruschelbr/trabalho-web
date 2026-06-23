@@ -23,6 +23,12 @@ const dbPassword = process.env.DB_PASSWORD
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   dialect: "postgres",
   host: dbHost,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 })
 
 export default sequelize

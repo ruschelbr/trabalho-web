@@ -34,7 +34,7 @@ async function create(request, response) {
     const created = await model.create({
       text: request.body.text,
       SongId: request.body.SongId,
-      UserId: request.UserId,
+      UserId: request.body.UserId
     })
 
     // Busca de novo já incluindo os dados do usuário, pra devolver pronto pro front renderizar
