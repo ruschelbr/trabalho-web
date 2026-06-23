@@ -1,16 +1,38 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FormPagina, FormTitulo, FormCampo, FormAcoes } from '../components/FormPagina.jsx'
+import api from '../api/api.js'
 
 function Login() {
   const [form, setForm] = useState({ email: '', senha: '' })
+  const [erro, setErro] = useState(null)
+  const [enviando, setEnviando] = useState(false)
+  const navigate = useNavigate()
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    setErro(null)
+    setEnviando(true)
+
+    try {
+      const response = await api.login({ email: form.email, password: form.senha })
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('UserId', response.data.UserId)
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+      if (error.response?.status === 401) {
+        setErro('Email ou senha incorretos.')
+      } else {
+        setErro('Não foi possível entrar agora. Tente novamente em alguns instantes.')
+      }
+    } finally {
+      setEnviando(false)
+    }
   }
 
   const isFormValid = form.email.trim() !== '' && form.senha.trim() !== ''
@@ -57,10 +79,11 @@ function Login() {
           </label>
         </div>
       </FormCampo>
+      {erro && <p className="comentarios-status comentarios-erro">{erro}</p>}
       <FormAcoes>
         <span className="btn-wrapper">
-          <button type="submit" className="btn linha-form" disabled={!isFormValid}>
-            Entrar
+          <button type="submit" className="btn linha-form" disabled={!isFormValid || enviando}>
+            {enviando ? 'Entrando...' : 'Entrar'}
           </button>
         </span>
       </FormAcoes>

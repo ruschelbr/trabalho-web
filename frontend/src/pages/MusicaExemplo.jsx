@@ -61,18 +61,23 @@ function MusicaExemplo() {
 
     const token = localStorage.getItem('token')
     if (!token) {
-      setErroEnvio('Você precisa estar logado para comentar. (O login ainda vai ser conectado ao backend.)')
+      setErroEnvio('Você precisa estar logado para comentar.')
       return
     }
 
     setEnviando(true)
     try {
-      const response = await api.createComment({ text: texto, songId: SONG_ID }, token)
+      const response = await api.createComment({ text: texto, SongId: SONG_ID }, token)
       setComentarios((atuais) => [response.data, ...atuais.filter((c) => c.id !== 'exemplo')])
       setTexto('')
     } catch (error) {
       console.log(error)
-      setErroEnvio('Não foi possível enviar o comentário agora. Tente novamente em alguns instantes.')
+      if (error.response?.status === 401) {
+        localStorage.removeItem('token')
+        setErroEnvio('Sua sessão expirou. Faça login novamente para comentar.')
+      } else {
+        setErroEnvio('Não foi possível enviar o comentário agora. Tente novamente em alguns instantes.')
+      }
     } finally {
       setEnviando(false)
     }
