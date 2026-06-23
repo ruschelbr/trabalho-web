@@ -1,4 +1,23 @@
 import model from "../models/user.model.js"
+import bcrypt from "bcryptjs"
+
+async function create(request, response) {
+  try {
+    const hashedPassword = bcrypt.hashSync(request.body.password, 10)
+    const result = await model.create({
+      name: request.body.name,
+      email: request.body.email,
+      password: hashedPassword,
+      profilePicture: request.body.profilePicture,
+      admin: request.body.admin ?? false,
+    })
+    const { password, ...userWithoutPassword } = result.toJSON()
+    response.status(201).json(userWithoutPassword)
+  } catch (error) {
+    console.log(error)
+    response.status(500).send("Erro ao criar usuário")
+  }
+}
 
 async function findAll(request, response) {
   try {
@@ -60,4 +79,4 @@ async function deleteById(request, response) {
   }
 }
 
-export default { findAll, findById, update, deleteById }
+export default { create, findAll, findById, update, deleteById }
