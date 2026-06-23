@@ -6,6 +6,7 @@ import songController from "../controllers/song.controller.js"
 import userController from "../controllers/user.controller.js"
 import contactController from "../controllers/contact.controller.js"
 import authController from "../controllers/auth.controller.js"
+import commentController from "../controllers/comment.controller.js"
 
 const router = express.Router()
 
@@ -54,5 +55,10 @@ router.delete("/users/:id", authController.validateToken, userController.deleteB
 // Contacts
 router.post("/contacts", contactController.create)
 router.get("/contacts", authController.validateToken, contactController.findAll)
+
+// Comments
+router.get("/songs/:songId/comments", commentController.findBySong)
+router.post("/comments", authController.validateToken, commentController.create)
+router.delete("/comments/:id", authController.validateToken, commentController.deleteById)
 
 export default router

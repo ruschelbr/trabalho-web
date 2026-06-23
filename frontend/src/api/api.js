@@ -6,4 +6,14 @@ async function createContact(contact) {
   return axios.post(url + '/contacts', contact)
 }
 
-export default { createContact }
+async function getSongComments(songId) {
+  return axios.get(`${url}/songs/${songId}/comments`)
+}
+
+async function createComment(comment, token) {
+  return axios.post(`${url}/comments`, comment, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
+export default { createContact, getSongComments, createComment }
