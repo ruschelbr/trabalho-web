@@ -29,7 +29,7 @@ async function create(request, response) {
             name: request.body.name,
             youtubeLink: request.body.youtubeLink,
             tracklistPosition: request.body.tracklistPosition,
-            albumId: request.body.albumId //ta certo? verificar
+            AlbumId: request.body.AlbumId //ta certo? verificar
         })
         response.json(result).status(201)
     } catch (error) {

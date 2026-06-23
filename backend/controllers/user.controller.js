@@ -10,6 +10,7 @@ async function create(request, response) {
       password: hashedPassword,
       profilePicture: request.body.profilePicture,
       admin: request.body.admin ?? false,
+      favoriteAlbumId: request.body.favoriteAlbumId
     })
     const { password, ...userWithoutPassword } = result.toJSON()
     response.status(201).json(userWithoutPassword)

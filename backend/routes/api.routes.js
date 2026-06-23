@@ -49,6 +49,7 @@ router.delete("/songs/:id", authController.validateToken, songController.deleteB
 // Users
 router.get("/users", authController.validateToken, userController.findAll)
 router.get("/users/:id", authController.validateToken, userController.findById)
+router.post("users", userController.create)
 router.put("/users/:id", authController.validateToken, userController.update)
 router.delete("/users/:id", authController.validateToken, userController.deleteById)
 
