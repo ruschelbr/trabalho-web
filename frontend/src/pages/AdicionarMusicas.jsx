@@ -110,9 +110,11 @@ function AdicionarMusicas() {
       </div>
 
       <FormAcoes>
-        <button type="submit" className="btn linha-form">
-          Publicar Álbum
-        </button>
+        <span className="btn-wrapper">
+          <button type="submit" className="btn linha-form" disabled={!musicas.every(m => m.nome.trim() !== '')}>
+            Publicar Álbum
+          </button>
+        </span>
       </FormAcoes>
     </FormPagina>
   )

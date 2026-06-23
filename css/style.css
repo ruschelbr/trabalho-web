@@ -10,7 +10,7 @@
 body {
     background-color: #1E1E1E !important;
     min-height: 100vh;
-    padding-top: 90px;
+    padding-top: 70px;
 }
 
 /* cabeçalho */
@@ -19,9 +19,11 @@ body {
     position: fixed;
     background-color: #191918;
     color: #FFFCFF;
-    min-height: 10vh;
+    min-height: 0 !important;
     min-width: 100%;
     z-index: 1000;
+    padding-top: clamp(8px, 1.5vw, 16px) !important;
+    padding-bottom: clamp(8px, 1.5vw, 16px) !important;
 }
 
 .header>a img {
@@ -95,11 +97,13 @@ body {
 #caixa-branca {
     margin: 15vh auto 10vh;
     width: 90%;
-    max-width: 500px;
+    max-width: 780px;
     background-color: #FFFCFF;
     min-height: 30vh;
     border-radius: 57px;
-    outline: 2px solid rgba(25, 25, 24, 0.11);
+    outline: none;
+    border: 2px solid #FFFCFF;
+    border-top: none;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.664);
     overflow: hidden;
     display: flex;
@@ -210,6 +214,36 @@ input:-webkit-autofill:active {
     transform: scale(1.06);
 }
 
+.btn:disabled {
+    background-color: rgba(25, 25, 24, 0.15) !important;
+    outline: 2px solid rgba(25, 25, 24, 0.1) !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-wrapper:has(button:disabled):hover::after {
+    content: "Preencha todos os campos";
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: #191918;
+    color: #FFFCFF;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    pointer-events: none;
+    z-index: 10;
+}
+
 /* layout padronizado dos formularios */
 .form-pagina {
     width: 100%;
@@ -239,9 +273,27 @@ input:-webkit-autofill:active {
 }
 
 .form-acoes {
-    padding: 0.75rem 1.5rem 1.25rem;
+    padding: 2.75rem 1.5rem 1.25rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.btn-voltar {
+    border-radius: 40rem;
+    background-color: #191918;
+    color: #FFFCFF;
+    border: none;
+    padding: 0.45rem 1rem;
+    font-family: inherit;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-voltar:hover {
+    transform: scale(1.05);
 }
 
 .form-upload {

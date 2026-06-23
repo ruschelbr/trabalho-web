@@ -62,14 +62,16 @@ function Contato() {
         />
       </FormCampo>
       {feedback && (
-        <p className={feedback.tipo === 'sucesso' ? 'texto-sucesso' : 'texto-erro'}>
+        <p className={feedback.tipo === 'sucesso' ? 'texto-sucesso' : 'texto-erro'} style={{ textAlign: 'center', padding: '0 1.5rem' }}>
           {feedback.mensagem}
         </p>
       )}
       <FormAcoes>
-        <button type="submit" className="btn linha-form">
-          Enviar
-        </button>
+        <span className="btn-wrapper">
+          <button type="submit" className="btn linha-form" disabled={!(form.nome.trim() && form.email.trim() && form.mensagem.trim())}>
+            Enviar
+          </button>
+        </span>
       </FormAcoes>
     </FormPagina>
   )

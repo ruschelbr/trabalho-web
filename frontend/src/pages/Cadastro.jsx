@@ -1,23 +1,53 @@
+import { useState } from 'react'
 import { FormPagina, FormTitulo, FormCampo, FormAcoes, FormUpload } from '../components/FormPagina.jsx'
 
 function Cadastro() {
+  const [form, setForm] = useState({ nome: '', email: '', senha: '' })
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
   function handleSubmit(e) {
     e.preventDefault()
   }
 
+  const isFormValid = form.nome.trim() !== '' && form.email.trim() !== '' && form.senha.trim() !== ''
+
   return (
     <FormPagina onSubmit={handleSubmit}>
       <FormTitulo>Cadastro</FormTitulo>
-      <FormCampo label="Nome:" htmlFor="nome-cadastro">
-        <input type="text" name="nome" id="nome-cadastro" className="form-input linha-form" />
+      <FormCampo label="Nome:">
+        <input
+          type="text"
+          name="nome"
+          id="nome-cadastro"
+          className="form-input linha-form"
+          value={form.nome}
+          onChange={handleChange}
+        />
       </FormCampo>
-      <FormCampo label="Email:" htmlFor="email-cadastro">
-        <input type="email" name="email" id="email-cadastro" className="form-input linha-form" />
+      <FormCampo label="Email:">
+        <input
+          type="email"
+          name="email"
+          id="email-cadastro"
+          className="form-input linha-form"
+          value={form.email}
+          onChange={handleChange}
+        />
       </FormCampo>
-      <FormCampo label="Senha:" htmlFor="senha-cadastro">
-        <input type="password" name="senha" id="senha-cadastro" className="form-input linha-form" />
+      <FormCampo label="Senha:">
+        <input
+          type="password"
+          name="senha"
+          id="senha-cadastro"
+          className="form-input linha-form"
+          value={form.senha}
+          onChange={handleChange}
+        />
       </FormCampo>
-      <FormCampo label="Álbum favorito:" htmlFor="album-cadastro">
+      <FormCampo label="Álbum favorito:">
         <select name="album" id="album-cadastro" className="dropdown-form linha-form">
           <option value="sunset">Splippleman at Sunset Sound... Lost, Now Found</option>
           <option value="night">Still Night Blue</option>
@@ -26,9 +56,11 @@ function Cadastro() {
       </FormCampo>
       <FormUpload id="perfil-cadastro" name="perfil" label="Foto de perfil:" />
       <FormAcoes>
-        <button type="submit" className="btn linha-form texto-escuro">
-          Cadastrar
-        </button>
+        <span className="btn-wrapper">
+          <button type="submit" className="btn linha-form texto-escuro" disabled={!isFormValid}>
+            Cadastrar
+          </button>
+        </span>
       </FormAcoes>
     </FormPagina>
   )

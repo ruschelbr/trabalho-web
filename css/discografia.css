@@ -96,7 +96,7 @@ body {
 }
 
 .bloco-album:first-of-type {
-    margin-top: 123px; 
+    margin-top: 0;
 }
  
 @media (max-width: 768px) {
