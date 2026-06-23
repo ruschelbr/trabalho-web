@@ -10,6 +10,7 @@
 body {
     background-color: #1E1E1E !important;
     min-height: 100vh;
+    padding-top: 90px;
 }
 
 /* cabeçalho */
@@ -73,10 +74,8 @@ body {
 /* formularios */
 
 .nome-formulario {
-    font-size: clamp(0.5rem, 3.5vw, 3.5rem) !important;
+    font-size: clamp(1.6rem, 3.5vw, 3.5rem) !important;
     font-weight: bolder;
-    text-shadow: 0.2px 1px 4px #191918;
-
 }
 
 .texto-escuro {
@@ -94,7 +93,7 @@ body {
 } */
 
 #caixa-branca {
-    margin: 15vh auto;
+    margin: 15vh auto 10vh;
     width: 90%;
     max-width: 500px;
     background-color: #FFFCFF;
@@ -107,29 +106,45 @@ body {
     flex-direction: column;
 }
 
-form label {
+form label:not(.form-upload),
+.form-upload-label {
     font-size: clamp(0.75rem, 1.2vw, 1.5rem);
-
 }
 
 .form-input {
     width: 100% !important;
     padding: 0.5rem 1.2rem;
     display: block;
-    border: none;
+    border: 2px solid rgba(25, 25, 24, 0.11);
     border-radius: 40rem;
     background-color: #ECECEC;
-    outline: 2px solid rgba(25, 25, 24, 0.11);
-    box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    outline: none;
+    box-sizing: border-box;
 }
 
 .linha-form {
-    transition: box-shadow 0.3s ease-in-out
 }
 
-.linha-form:hover,
-.linha-form:focus-within {
-    box-shadow: 2px 4px 10px #2B9CCC;
+.form-input:hover,
+.linha-form:hover {
+    border-color: rgba(252, 232, 41, 0.8);
+}
+
+.form-input:focus,
+.form-input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(252, 232, 41, 0.8) !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #ECECEC inset !important;
+    box-shadow: 0 0 0 30px #ECECEC inset !important;
+    -webkit-text-fill-color: #191918 !important;
+    border-color: rgba(25, 25, 24, 0.11) !important;
 }
 
 .checkbox {
@@ -147,11 +162,11 @@ form label {
 .dropdown-form {
     width: 100% !important;
     padding: 0.5rem 1.2rem !important;
-    border: none !important;
+    border: 2px solid rgba(25, 25, 24, 0.11) !important;
     border-radius: 40rem !important;
     background-color: #ECECEC !important;
-    outline: 2px solid rgba(25, 25, 24, 0.11) !important;
-    box-shadow: 6px 12px 30px rgba(0, 0, 0, 0.25);
+    outline: none !important;
+    box-sizing: border-box !important;
     appearance: auto !important;
     -webkit-appearance: auto !important;
     -moz-appearance: auto !important;
@@ -160,15 +175,30 @@ form label {
     color: #191918;
 }
 
-.dropdown-form:hover,
+.dropdown-form:has(option[value=""]:checked) {
+    color: rgba(25, 25, 24, 0.4) !important;
+}
+
+.dropdown-form option {
+    color: #191918;
+}
+
+.dropdown-form:hover {
+    border-color: rgba(252, 232, 41, 0.8) !important;
+}
+
 .dropdown-form:focus,
 .dropdown-form:focus-visible {
-    box-shadow: 2px 4px 10px #2B9CCC !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: rgba(252, 232, 41, 0.8) !important;
 }
 
 .btn {
     background-color: #FCE829 !important;
-    width: clamp(80px, 10vw, 15vw) !important;
+    width: auto !important;
+    padding: 0.5rem clamp(1rem, 3vw, 2rem) !important;
+    white-space: nowrap;
     border-radius: 40rem !important;
     border: none;
     outline: 2px solid #E9D51B;
@@ -217,6 +247,7 @@ form label {
 .form-upload {
     cursor: pointer;
     display: block;
+    color: rgba(25, 25, 24, 0.4);
 }
 
 .form-subtitulo {

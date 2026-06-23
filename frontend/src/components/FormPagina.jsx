@@ -24,7 +24,7 @@ function FormCampo({ label, htmlFor, children }) {
   return (
     <div className="form-campo">
       {label && (
-        <label htmlFor={htmlFor} className="texto-escuro">
+        <label className="texto-escuro">
           {label}
         </label>
       )}
