@@ -7,7 +7,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 dotenv.config({ path: path.resolve(__dirname, "../.env") })
-
 console.log("=== TESTE DE CONEXÃO ===")
 console.log("DB_HOST:", process.env.DB_HOST)
 console.log(
@@ -24,6 +23,12 @@ const dbPassword = process.env.DB_PASSWORD
 const sequelize = new Sequelize(dbName, dbUser, dbPassword, {
   dialect: "postgres",
   host: dbHost,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 })
 
 export default sequelize

@@ -12,7 +12,7 @@ body {
   width: 100vw;
   min-height: 80vh;
   overflow: hidden;
-  margin-top: 123px; /* header não fica sobre o container */
+  margin-top: 0;
 }
 
 .img-home-1 {
