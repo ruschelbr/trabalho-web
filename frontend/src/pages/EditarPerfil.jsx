@@ -8,6 +8,7 @@ function EditarPerfil() {
   const [form, setForm] = useState({ nome: '', album: '' })
   const [email, setEmail] = useState('')
   const [fotoPerfil, setFotoPerfil] = useState('/logo.jpg')
+  const [fotoArquivo, setFotoArquivo] = useState(null)
   const [albuns, setAlbuns] = useState([])
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
@@ -60,6 +61,11 @@ function EditarPerfil() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  function handleFotoChange(e) {
+    const file = e.target.files?.[0]
+    if (file) setFotoArquivo(file)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     const userId = localStorage.getItem('UserId')
@@ -72,10 +78,16 @@ function EditarPerfil() {
     setEnviando(true)
 
     try {
+      let profilePicture = fotoPerfil
+      if (fotoArquivo) {
+        const uploadRes = await api.uploadImage(fotoArquivo)
+        profilePicture = uploadRes.data.path
+      }
+
       const payload = {
         name: form.nome,
         email,
-        profilePicture: fotoPerfil,
+        profilePicture,
       }
 
       if (form.album) {
@@ -144,7 +156,13 @@ function EditarPerfil() {
           ))}
         </select>
       </FormCampo>
-      <FormUpload id="perfil-foto" name="perfil" label="Foto de perfil:" />
+      <FormUpload
+        id="perfil-foto"
+        name="perfil"
+        label="Foto de perfil:"
+        onChange={handleFotoChange}
+        fileName={fotoArquivo?.name}
+      />
       {erro && <p className="comentarios-status comentarios-erro">{erro}</p>}
       <FormAcoes>
         <div style={{ flex: 1 }}>

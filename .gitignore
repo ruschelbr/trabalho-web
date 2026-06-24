@@ -1,3 +1,7 @@
 node_modules/
 .env
 package-lock.json
+
+# uploads gerados em runtime (fotos de perfil, etc.)
+uploads/
+backend/uploads/
