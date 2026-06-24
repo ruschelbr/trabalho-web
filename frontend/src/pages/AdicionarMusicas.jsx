@@ -1,12 +1,18 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { FormPagina, FormTitulo, FormAcoes } from '../components/FormPagina.jsx'
+import api from '../api/api.js'
 
 function AdicionarMusicas() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const { albumId, albumNome } = location.state || {}
+
   const proximoId = useRef(2)
   const [musicas, setMusicas] = useState([{ id: 1, nome: '', link: '' }])
   const [novasIds, setNovasIds] = useState(() => new Set())
+  const [loading, setLoading] = useState(false)
+  const [feedback, setFeedback] = useState(null)
 
   function adicionarMusica() {
     const id = proximoId.current++
@@ -32,17 +38,38 @@ function AdicionarMusicas() {
     })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    navigate('/')
+    setLoading(true)
+    setFeedback(null)
+    try {
+      await Promise.all(
+        musicas.map((musica, index) =>
+          api.createSong({
+            name: musica.nome,
+            youtubeLink: musica.link,
+            tracklistPosition: index + 1,
+            AlbumId: albumId,
+          }),
+        ),
+      )
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+      setFeedback('Erro ao adicionar músicas. Tente novamente.')
+    } finally {
+      setLoading(false)
+    }
   }
+
+  const isFormValid = musicas.every((m) => m.nome.trim() !== '' && m.link.trim() !== '')
 
   return (
     <FormPagina onSubmit={handleSubmit}>
       <FormTitulo
         subtitulo={
           <p className="texto-escuro form-subtitulo">
-            Álbum: <span>Nome do Álbum</span>
+            Álbum: <span>{albumNome || '—'}</span>
           </p>
         }
       >
@@ -109,10 +136,18 @@ function AdicionarMusicas() {
         </button>
       </div>
 
+      {feedback && (
+        <p style={{ textAlign: 'center', color: '#c0392b', padding: '0 1.5rem' }}>{feedback}</p>
+      )}
+
       <FormAcoes>
         <span className="btn-wrapper">
-          <button type="submit" className="btn linha-form" disabled={!musicas.every(m => m.nome.trim() !== '')}>
-            Publicar Álbum
+          <button
+            type="submit"
+            className="btn linha-form"
+            disabled={!isFormValid || loading}
+          >
+            {loading ? 'Publicando...' : 'Publicar Álbum'}
           </button>
         </span>
       </FormAcoes>

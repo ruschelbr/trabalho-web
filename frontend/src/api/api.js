@@ -30,14 +30,27 @@ async function createComment({ text, SongId }, token) {
 }
 
 // album
-async function getAlbums(){
+async function getAlbums() {
   return axios.get(url + "/albums")
 }
-// pra cadastrar e editar o album tbm -- Pedro
 
-// songs
-async function getSongsOfAlbum(){
-  return axios.get(url + "/albums/:albumId/songs")
+async function createAlbum(data) {
+  return axios.post(url + "/albums", data)
 }
 
-export default { createContact, login, register, getSongComments, createComment, getAlbums, getSongsOfAlbum }
+async function uploadImage(formData) {
+  return axios.post(url + "/upload", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  })
+}
+
+// songs
+async function getSongsOfAlbum(albumId) {
+  return axios.get(`${url}/albums/${albumId}/songs`)
+}
+
+async function createSong(data) {
+  return axios.post(url + "/songs", data)
+}
+
+export default { createContact, login, register, getSongComments, createComment, getAlbums, createAlbum, uploadImage, getSongsOfAlbum, createSong }
