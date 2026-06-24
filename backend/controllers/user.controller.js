@@ -47,6 +47,14 @@ async function findById(request, response) {
 
 const emojiRegex = /\p{Extended_Pictographic}/u
 
+function validarSenha(senha) {
+  if (senha.length < 8) return "A senha deve ter pelo menos 8 caracteres"
+  if (!/[0-9]/.test(senha)) return "A senha deve ter pelo menos 1 número"
+  if (!/[A-Z]/.test(senha)) return "A senha deve ter pelo menos 1 letra maiúscula"
+  if (!/[a-z]/.test(senha)) return "A senha deve ter pelo menos 1 letra minúscula"
+  return null
+}
+
 async function update(request, response) {
   try {
     if (request.body.name && emojiRegex.test(request.body.name)) {
@@ -56,15 +64,34 @@ async function update(request, response) {
       }
     }
 
-    const success = await model.update(
-      {
-        name: request.body.name,
-        email: request.body.email,
-        profilePicture: request.body.profilePicture,
-        favoriteAlbumId: request.body.favoriteAlbumId,
-      },
-      { where: { id: request.params.id } },
-    )
+    // Troca de senha: exige senha atual e valida a nova
+    const campos = {
+      name: request.body.name,
+      email: request.body.email,
+      profilePicture: request.body.profilePicture,
+      favoriteAlbumId: request.body.favoriteAlbumId,
+    }
+
+    if (request.body.newPassword) {
+      const erroSenha = validarSenha(request.body.newPassword)
+      if (erroSenha) {
+        return response.status(400).json({ message: erroSenha })
+      }
+
+      // Busca o usuário com a senha para verificar a senha atual
+      const user = await model.findByPk(request.params.id)
+      if (!user) return response.status(404).send()
+
+      const senhaCorreta = bcrypt.compareSync(request.body.currentPassword, user.password)
+      if (!senhaCorreta) {
+        return response.status(401).json({ message: "Senha atual incorreta" })
+      }
+
+      campos.password = bcrypt.hashSync(request.body.newPassword, 10)
+    }
+
+    const success = await model.update(campos, { where: { id: request.params.id } })
+
     if (success == 1) {
       response.status(200).send()
     } else {
@@ -72,6 +99,7 @@ async function update(request, response) {
     }
   } catch (error) {
     console.log(error)
+    response.status(500).send()
   }
 }
 
