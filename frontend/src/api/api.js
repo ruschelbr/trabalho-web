@@ -16,6 +16,15 @@ async function register(data) {
   return axios.post(`${url}/register`, data)
 }
 
+// usuario
+async function getUser(userId) {
+  return axios.get(`${url}/users/${userId}`)
+}
+
+async function updateUser(userId, data) {
+  return axios.put(`${url}/users/${userId}`, data)
+}
+
 // comentarios
 async function getSongComments(songId) {
   return axios.get(`${url}/songs/${songId}/comments`)
@@ -54,3 +63,4 @@ async function createSong(data) {
 }
 
 export default { createContact, login, register, getSongComments, createComment, getAlbums, createAlbum, uploadImage, getSongsOfAlbum, createSong }
+export default { createContact, login, register, getUser, updateUser, getSongComments, createComment, getAlbums, getSongsOfAlbum }
