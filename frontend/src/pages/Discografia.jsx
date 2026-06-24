@@ -7,7 +7,7 @@ function Faixa({ faixa, tracklistClasse }) {
   return (
     <li>
       <Link
-        to={`/musica/${encodeURIComponent(faixa.name)}`}
+        to={`/musica/${faixa.id}/${encodeURIComponent(faixa.name)}`}
         className={tracklistClasse}
       >
         {faixa.name}

@@ -78,6 +78,10 @@ async function createSong(data) {
   return axios.post(`${url}/songs`, data)
 }
 
+async function getSongById(id) {
+  return axios.get(`${url}/songs/${id}`)
+}
+
 export default {
   createContact,
   login,
@@ -92,4 +96,5 @@ export default {
   createAlbum,
   getSongsOfAlbum,
   createSong,
+  getSongById
 }
