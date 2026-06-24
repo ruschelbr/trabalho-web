@@ -8,6 +8,9 @@ function Perfil() {
   const [usuario, setUsuario] = useState(null)
   const [carregando, setCarregando] = useState(true)
   const [erro, setErro] = useState(null)
+  const [confirmarSaida, setConfirmarSaida] = useState(false)
+
+  const isAdmin = localStorage.getItem('admin') === 'true'
 
   useEffect(() => {
     const userId = localStorage.getItem('UserId')
@@ -47,9 +50,7 @@ function Perfil() {
     }
 
     carregarPerfil()
-    return () => {
-      ativo = false
-    }
+    return () => { ativo = false }
   }, [navigate])
 
   function handleSubmit(e) {
@@ -57,44 +58,73 @@ function Perfil() {
     navigate('/editar-perfil')
   }
 
+  function handleSair() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('UserId')
+    localStorage.removeItem('admin')
+    navigate('/')
+    window.scrollTo(0, 0)
+  }
+
   return (
     <FormPagina onSubmit={handleSubmit}>
-      <div id="perfil" className="form-perfil">
-        {carregando && <p className="comentarios-status">Carregando perfil...</p>}
 
-        {!carregando && erro && (
-          <p className="comentarios-status comentarios-erro">{erro}</p>
-        )}
+      <div className="perfil-banner">
+        <div className="perfil-foto-wrapper">
+          <img
+            src={api.resolveImageUrl(usuario?.profilePicture)}
+            alt="foto de perfil"
+            className="perfil-foto"
+          />
+        </div>
+      </div>
+
+      <div className="perfil-corpo inter">
+        {carregando && <p className="comentarios-status">Carregando perfil...</p>}
+        {!carregando && erro && <p className="comentarios-status comentarios-erro">{erro}</p>}
 
         {!carregando && usuario && (
           <>
-            <div className="form-campo">
-              <img
-                src={api.resolveImageUrl(usuario.profilePicture)}
-                alt="foto-perfil"
-                className="img-perfil"
-              />
-            </div>
-            <div className="form-campo-dados">
-              <p className="texto-escuro fw-bold">Nome:</p>
-              <p className="texto-escuro">{usuario.name}</p>
-            </div>
-            <div className="form-campo-dados">
-              <p className="texto-escuro fw-bold">Álbum favorito:</p>
-              <p className="texto-escuro">{usuario.albumFavorito}</p>
-            </div>
-            <div className="form-campo-dados">
-              <p className="texto-escuro fw-bold">Email:</p>
-              <p className="texto-escuro">{usuario.email}</p>
+            <p className="perfil-nome google-sans">{usuario.name}</p>
+            {isAdmin && <span className="perfil-badge-admin">⭐ Admin</span>}
+
+            <div className="perfil-info-grid">
+              <div className="perfil-info-item">
+                <span className="perfil-info-label">Email</span>
+                <span className="perfil-info-valor">{usuario.email}</span>
+              </div>
+              <div className="perfil-info-item">
+                <span className="perfil-info-label">Álbum favorito</span>
+                <span className="perfil-info-valor">{usuario.albumFavorito}</span>
+              </div>
             </div>
           </>
         )}
       </div>
+
       <FormAcoes>
+        <div style={{ flex: 1 }}>
+          <button type="button" className="btn-sair" onClick={() => setConfirmarSaida(true)}>
+            Sair
+          </button>
+        </div>
         <button type="submit" className="btn linha-form" disabled={carregando || !usuario}>
           Editar
         </button>
+        <div style={{ flex: 1 }} />
       </FormAcoes>
+
+      {confirmarSaida && (
+        <div className="modal-overlay">
+          <div className="modal-caixa inter">
+            <p>Tem certeza que deseja sair?</p>
+            <div className="modal-botoes">
+              <button type="button" className="btn-modal-sim" onClick={handleSair}>SIM</button>
+              <button type="button" className="btn-modal-nao" onClick={() => setConfirmarSaida(false)}>NÃO</button>
+            </div>
+          </div>
+        </div>
+      )}
     </FormPagina>
   )
 }

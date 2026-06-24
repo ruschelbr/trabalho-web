@@ -6,6 +6,7 @@ import api from '../api/api.js'
 function EditarPerfil() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ nome: '', album: '' })
+  const [formOriginal, setFormOriginal] = useState({ nome: '', album: '' })
   const [email, setEmail] = useState('')
   const [fotoPerfil, setFotoPerfil] = useState('/logo.jpg')
   const [fotoArquivo, setFotoArquivo] = useState(null)
@@ -35,13 +36,15 @@ function EditarPerfil() {
         if (!ativo) return
 
         const usuario = usuarioRes.data
+        const valores = {
+          nome: usuario.name,
+          album: usuario.favoriteAlbumId ? String(usuario.favoriteAlbumId) : '',
+        }
         setAlbuns(albunsRes.data)
         setEmail(usuario.email)
         setFotoPerfil(usuario.profilePicture || '/logo.jpg')
-        setForm({
-          nome: usuario.name,
-          album: usuario.favoriteAlbumId ? String(usuario.favoriteAlbumId) : '',
-        })
+        setForm(valores)
+        setFormOriginal(valores)
       } catch (error) {
         console.log(error)
         if (!ativo) return
@@ -104,7 +107,12 @@ function EditarPerfil() {
     }
   }
 
-  const isFormValid = form.nome.trim() !== ''
+  const houveMudanca =
+    form.nome !== formOriginal.nome ||
+    form.album !== formOriginal.album ||
+    fotoArquivo !== null
+
+  const isFormValid = form.nome.trim() !== '' && houveMudanca
 
   if (carregando) {
     return (

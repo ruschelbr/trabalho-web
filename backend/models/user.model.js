@@ -9,7 +9,7 @@ User.init({
     name: { type: DataTypes.STRING, allowNull:false },
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
     password: { type: DataTypes.STRING, allowNull: false },
-    profilePicture: { type: DataTypes.STRING, allowNull:false }, //de novo, string pq por enquanto vai ser a url
+    profilePicture: { type: DataTypes.STRING, allowNull: true },
     admin: { type: DataTypes.BOOLEAN, allowNull: false }
 }, {sequelize, timestamps: true})
 

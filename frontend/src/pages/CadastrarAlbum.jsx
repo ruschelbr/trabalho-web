@@ -19,7 +19,7 @@ function CadastrarAlbum() {
     setLoading(true)
     setFeedback(null)
     try {
-      let coverPath = ''
+      let coverPath = null
       if (capa) {
         const formData = new FormData()
         formData.append('image', capa)

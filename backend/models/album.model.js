@@ -9,7 +9,7 @@ Album.init(
     name: { type: DataTypes.STRING, allowNull: false },
     release: { type: DataTypes.STRING, allowNull: false },
     type: { type: DataTypes.STRING, allowNull: false },
-    cover: { type: DataTypes.STRING, allowNull: false }, //coloquei como string pq por enquanto a imagem vai ser da url
+    cover: { type: DataTypes.STRING, allowNull: true },
   },
   { sequelize, timestamps: true },
 )

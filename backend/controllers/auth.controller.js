@@ -38,7 +38,7 @@ async function register(request, response) {
       name: request.body.name,
       email: request.body.email,
       password: hashedPassword,
-      profilePicture: request.body.profilePicture || "",
+      profilePicture: request.body.profilePicture || null,
       admin: isAdmin,
       favoriteAlbumId: request.body.favoriteAlbumId
     })

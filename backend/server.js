@@ -27,7 +27,7 @@ app.use("/uploads", express.static(uploadsDir))
 app.use("/api", router)
 
 async function start() {
-  await sequelize.sync()
+  await sequelize.sync({ alter: true })
   app.listen(3000, () => console.log("Servidor rodando na porta 3000"))
 
 }

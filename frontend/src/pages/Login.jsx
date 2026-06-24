@@ -22,7 +22,9 @@ function Login() {
       const response = await api.login({ email: form.email, password: form.senha })
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('UserId', response.data.UserId)
+      localStorage.setItem('admin', response.data.admin)
       navigate('/')
+      window.scrollTo(0, 0)
     } catch (error) {
       console.log(error)
       if (error.response?.status === 401) {
