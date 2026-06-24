@@ -1,6 +1,8 @@
 import express from "express"
 import multer from "multer"
 import path from "path"
+import fs from "fs"
+import { fileURLToPath } from "url"
 import albumController from "../controllers/album.controller.js"
 import songController from "../controllers/song.controller.js"
 import userController from "../controllers/user.controller.js"
@@ -10,10 +12,18 @@ import commentController from "../controllers/comment.controller.js"
 
 const router = express.Router()
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const uploadsDir = path.join(__dirname, "..", "uploads")
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true })
+}
+
 // Upload config (multer)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/")
+    cb(null, uploadsDir)
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname)
