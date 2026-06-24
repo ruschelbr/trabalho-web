@@ -41,8 +41,7 @@ function Cadastro() {
     try {
       let profilePicture = '/logo.jpg'
       if (fotoArquivo) {
-        const uploadRes = await api.uploadImage(fotoArquivo)
-        profilePicture = uploadRes.data.path
+        profilePicture = await api.fileToDataUri(fotoArquivo)
       }
 
       const payload = {
@@ -59,6 +58,7 @@ function Cadastro() {
       const response = await api.register(payload)
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('UserId', response.data.UserId)
+      localStorage.setItem('admin', String(response.data.admin))
       navigate('/perfil')
     } catch (error) {
       console.log(error)

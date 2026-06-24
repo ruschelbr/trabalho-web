@@ -111,8 +111,7 @@ function EditarPerfil() {
     try {
       let profilePicture = fotoPerfil
       if (fotoArquivo) {
-        const uploadRes = await api.uploadImage(fotoArquivo)
-        profilePicture = uploadRes.data.path
+        profilePicture = await api.fileToDataUri(fotoArquivo)
       }
 
       const payload = {

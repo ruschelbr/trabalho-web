@@ -5,4 +5,5 @@ export function isLoggedIn() {
 export function logout() {
   localStorage.removeItem('token')
   localStorage.removeItem('UserId')
+  localStorage.removeItem('admin')
 }

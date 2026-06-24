@@ -6,7 +6,7 @@ class Comment extends Model {}
 Comment.init(
   {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    text: { type: DataTypes.STRING, allowNull: false },
+    text: { type: DataTypes.TEXT, allowNull: false },
     pinnedAt: { type: DataTypes.DATE, allowNull: true },
   },
   { sequelize, timestamps: true },

@@ -3,6 +3,15 @@ import axios from "axios"
 const API_ORIGIN = "http://localhost:3000"
 const url = `${API_ORIGIN}/api`
 
+function fileToDataUri(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
+
 function resolveImageUrl(imagePath) {
   if (!imagePath) return "/logo.jpg"
   if (imagePath.startsWith("http://") || imagePath.startsWith("https://"))
@@ -128,6 +137,7 @@ async function getSongById(id) {
 }
 
 export default {
+  fileToDataUri,
   createContact,
   login,
   register,
