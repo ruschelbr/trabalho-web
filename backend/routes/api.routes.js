@@ -70,6 +70,7 @@ router.get("/contacts", authController.validateToken, contactController.findAll)
 // Comments
 router.get("/songs/:songId/comments", commentController.findBySong)
 router.post("/comments", authController.validateToken, commentController.create)
+router.patch("/comments/:id/pin", authController.validateToken, commentController.pin)
 router.delete("/comments/:id", authController.validateToken, commentController.deleteById)
 
 export default router

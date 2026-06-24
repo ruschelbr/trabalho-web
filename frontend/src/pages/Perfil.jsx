@@ -86,7 +86,7 @@ function Perfil() {
         {!carregando && usuario && (
           <>
             <p className="perfil-nome google-sans">{usuario.name}</p>
-            {isAdmin && <span className="perfil-badge-admin">⭐ Admin</span>}
+            {isAdmin && <span className="perfil-badge-admin">Admin</span>}
 
             <div className="perfil-info-grid">
               <div className="perfil-info-item">

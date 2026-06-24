@@ -70,6 +70,21 @@ async function createComment({ text, SongId }, token) {
   )
 }
 
+async function pinComment(id, token) {
+  return axios.patch(
+    `${url}/comments/${id}/pin`,
+    {},
+    { headers: { Authorization: `Bearer ${token}` } },
+  )
+}
+
+async function deleteComment(id, token) {
+  return axios.delete(
+    `${url}/comments/${id}`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  )
+}
+
 // album
 async function getAlbums() {
   return axios.get(`${url}/albums`)
@@ -122,6 +137,8 @@ export default {
   resolveImageUrl,
   getSongComments,
   createComment,
+  pinComment,
+  deleteComment,
   getAlbums,
   createAlbum,
   getSongsOfAlbum,
