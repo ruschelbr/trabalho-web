@@ -33,9 +33,16 @@ async function updateUser(userId, data) {
   return axios.put(`${url}/users/${userId}`, data)
 }
 
-async function uploadImage(file) {
-  const formData = new FormData()
-  formData.append('image', file)
+async function uploadImage(fileOrFormData) {
+  const formData =
+    fileOrFormData instanceof FormData
+      ? fileOrFormData
+      : (() => {
+          const fd = new FormData()
+          fd.append('image', fileOrFormData)
+          return fd
+        })()
+
   return axios.post(`${url}/upload`, formData)
 }
 
@@ -53,14 +60,21 @@ async function createComment({ text, SongId }, token) {
 }
 
 // album
-async function getAlbums(){
-  return axios.get(url + "/albums")
+async function getAlbums() {
+  return axios.get(`${url}/albums`)
 }
-// pra cadastrar e editar o album tbm -- Pedro
+
+async function createAlbum(data) {
+  return axios.post(`${url}/albums`, data)
+}
 
 // songs
-async function getSongsOfAlbum(){
-  return axios.get(url + "/albums/:albumId/songs")
+async function getSongsOfAlbum(albumId) {
+  return axios.get(`${url}/albums/${albumId}/songs`)
+}
+
+async function createSong(data) {
+  return axios.post(`${url}/songs`, data)
 }
 
 export default {
@@ -74,5 +88,7 @@ export default {
   getSongComments,
   createComment,
   getAlbums,
+  createAlbum,
   getSongsOfAlbum,
+  createSong,
 }

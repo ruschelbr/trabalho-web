@@ -1,18 +1,48 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FormPagina, FormTitulo, FormCampo, FormAcoes, FormUpload } from '../components/FormPagina.jsx'
+import api from '../api/api.js'
 
 function CadastrarAlbum() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ nome: '', data: '', tipo: '' })
+  const [capa, setCapa] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [feedback, setFeedback] = useState(null)
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    navigate('/adicionar-musicas')
+    setLoading(true)
+    setFeedback(null)
+    try {
+      let coverPath = ''
+      if (capa) {
+        const formData = new FormData()
+        formData.append('image', capa)
+        const uploadResult = await api.uploadImage(formData)
+        coverPath = uploadResult.data.path
+      }
+
+      const albumResult = await api.createAlbum({
+        name: form.nome,
+        release: form.data,
+        type: form.tipo,
+        cover: coverPath,
+      })
+
+      navigate('/adicionar-musicas', {
+        state: { albumId: albumResult.data.id, albumNome: form.nome },
+      })
+    } catch (error) {
+      console.log(error)
+      setFeedback('Erro ao cadastrar álbum. Tente novamente.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   const isFormValid = form.nome.trim() !== '' && form.data.trim() !== '' && form.tipo !== ''
@@ -59,11 +89,23 @@ function CadastrarAlbum() {
           <option value="outro">Outro</option>
         </select>
       </FormCampo>
-      <FormUpload id="capa-album" name="capa" label="Capa do Álbum:" />
+      <FormUpload
+        id="capa-album"
+        name="capa"
+        label="Capa do Álbum:"
+        onChange={(e) => setCapa(e.target.files[0] || null)}
+      />
+      {feedback && (
+        <p style={{ textAlign: 'center', color: '#c0392b', padding: '0 1.5rem' }}>{feedback}</p>
+      )}
       <FormAcoes>
         <span className="btn-wrapper">
-          <button type="submit" className="btn linha-form" disabled={!isFormValid}>
-            Criar Álbum
+          <button
+            type="submit"
+            className="btn linha-form"
+            disabled={!isFormValid || loading}
+          >
+            {loading ? 'Criando...' : 'Criar Álbum'}
           </button>
         </span>
       </FormAcoes>
