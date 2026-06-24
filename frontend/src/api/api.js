@@ -1,13 +1,14 @@
-import axios from 'axios'
+import axios from "axios"
 
-const API_ORIGIN = 'http://localhost:3000'
+const API_ORIGIN = "http://localhost:3000"
 const url = `${API_ORIGIN}/api`
 
 function resolveImageUrl(imagePath) {
-  if (!imagePath) return '/logo.jpg'
-  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath
-  if (imagePath.startsWith('/uploads/')) return `${API_ORIGIN}${imagePath}`
-  if (imagePath.startsWith('uploads/')) return `${API_ORIGIN}/${imagePath}`
+  if (!imagePath) return "/logo.jpg"
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://"))
+    return imagePath
+  if (imagePath.startsWith("/uploads/")) return `${API_ORIGIN}${imagePath}`
+  if (imagePath.startsWith("uploads/")) return `${API_ORIGIN}/${imagePath}`
   return imagePath
 }
 
@@ -27,24 +28,33 @@ async function register(data) {
 
 // usuario
 async function getUser(userId) {
-  return axios.get(`${url}/users/${userId}`)
+  const token = localStorage.getItem("token")
+  return axios.get(`${url}/users/${userId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }
 
 async function updateUser(userId, data) {
-  return axios.put(`${url}/users/${userId}`, data)
+  const token = localStorage.getItem("token")
+  return axios.put(`${url}/users/${userId}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }
 
 async function uploadImage(fileOrFormData) {
+  const token = localStorage.getItem("token")
   const formData =
     fileOrFormData instanceof FormData
       ? fileOrFormData
       : (() => {
           const fd = new FormData()
-          fd.append('image', fileOrFormData)
+          fd.append("image", fileOrFormData)
           return fd
         })()
 
-  return axios.post(`${url}/upload`, formData)
+  return axios.post(`${url}/upload`, formData, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }
 
 // comentarios
@@ -96,5 +106,5 @@ export default {
   createAlbum,
   getSongsOfAlbum,
   createSong,
-  getSongById
+  getSongById,
 }
