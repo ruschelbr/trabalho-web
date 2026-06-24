@@ -15,6 +15,12 @@ function EditarPerfil() {
   const [erro, setErro] = useState(null)
   const [enviando, setEnviando] = useState(false)
 
+  // campos de senha
+  const [senhaAtual, setSenhaAtual] = useState('')
+  const [senhaNova, setSenhaNova] = useState('')
+  const [senhaConfirmar, setSenhaConfirmar] = useState('')
+  const [mostrarSenha, setMostrarSenha] = useState(false)
+
   useEffect(() => {
     const userId = localStorage.getItem('UserId')
     if (!userId) {
@@ -55,9 +61,7 @@ function EditarPerfil() {
     }
 
     carregarDados()
-    return () => {
-      ativo = false
-    }
+    return () => { ativo = false }
   }, [navigate])
 
   function handleChange(e) {
@@ -85,6 +89,23 @@ function EditarPerfil() {
       return
     }
 
+    // Validações de senha no front (só se o usuário preencheu algum campo de senha)
+    const querTrocarSenha = senhaAtual || senhaNova || senhaConfirmar
+    if (querTrocarSenha) {
+      if (!senhaAtual) {
+        setErro('Informe sua senha atual para alterá-la.')
+        return
+      }
+      if (!senhaNova) {
+        setErro('Informe a nova senha.')
+        return
+      }
+      if (senhaNova !== senhaConfirmar) {
+        setErro('A nova senha e a confirmação não coincidem.')
+        return
+      }
+    }
+
     setEnviando(true)
 
     try {
@@ -104,11 +125,22 @@ function EditarPerfil() {
         payload.favoriteAlbumId = Number(form.album)
       }
 
+      if (querTrocarSenha) {
+        payload.currentPassword = senhaAtual
+        payload.newPassword = senhaNova
+      }
+
       await api.updateUser(userId, payload)
       navigate('/perfil')
     } catch (error) {
       console.log(error)
-      setErro('Não foi possível salvar as alterações. Tente novamente em alguns instantes.')
+      if (error.response?.status === 401) {
+        setErro('Senha atual incorreta.')
+      } else if (error.response?.status === 400) {
+        setErro(error.response.data?.message || 'Senha inválida.')
+      } else {
+        setErro('Não foi possível salvar as alterações. Tente novamente em alguns instantes.')
+      }
     } finally {
       setEnviando(false)
     }
@@ -117,7 +149,10 @@ function EditarPerfil() {
   const houveMudanca =
     form.nome !== formOriginal.nome ||
     form.album !== formOriginal.album ||
-    fotoArquivo !== null
+    fotoArquivo !== null ||
+    senhaAtual !== '' ||
+    senhaNova !== '' ||
+    senhaConfirmar !== ''
 
   const isFormValid = form.nome.trim() !== '' && houveMudanca
 
@@ -133,6 +168,7 @@ function EditarPerfil() {
   return (
     <FormPagina onSubmit={handleSubmit}>
       <FormTitulo>Editar</FormTitulo>
+
       <FormCampo label="Nome:">
         <input
           type="text"
@@ -143,16 +179,7 @@ function EditarPerfil() {
           onChange={handleChange}
         />
       </FormCampo>
-      <FormCampo label="Senha:">
-        <input
-          type="password"
-          name="senha"
-          id="senha-perfil"
-          className="form-input linha-form"
-          disabled
-          placeholder="Alteração de senha em breve"
-        />
-      </FormCampo>
+
       <FormCampo label="Álbum favorito:">
         <select
           name="album"
@@ -171,6 +198,7 @@ function EditarPerfil() {
           ))}
         </select>
       </FormCampo>
+
       <FormUpload
         id="perfil-foto"
         name="perfil"
@@ -178,7 +206,68 @@ function EditarPerfil() {
         onChange={handleFotoChange}
         fileName={fotoArquivo?.name}
       />
+
+      {/* Seção de senha — toggle */}
+      <div style={{ padding: '0.25rem 1.5rem 0' }}>
+        <button
+          type="button"
+          className="btn-voltar"
+          onClick={() => {
+            setMostrarSenha((v) => !v)
+            setSenhaAtual('')
+            setSenhaNova('')
+            setSenhaConfirmar('')
+          }}
+        >
+          {mostrarSenha ? '✕ Cancelar troca de senha' : '🔑 Alterar senha'}
+        </button>
+      </div>
+
+      {mostrarSenha && (
+        <>
+          <FormCampo label="Senha atual:">
+            <input
+              type="password"
+              id="senha-atual"
+              className="form-input linha-form"
+              value={senhaAtual}
+              onChange={(e) => setSenhaAtual(e.target.value)}
+              autoComplete="current-password"
+            />
+          </FormCampo>
+          <FormCampo label="Nova senha:">
+            <input
+              type="password"
+              id="senha-nova"
+              className="form-input linha-form"
+              value={senhaNova}
+              onChange={(e) => setSenhaNova(e.target.value)}
+              autoComplete="new-password"
+            />
+          </FormCampo>
+          <FormCampo label="Confirmar nova senha:">
+            <input
+              type="password"
+              id="senha-confirmar"
+              className="form-input linha-form"
+              value={senhaConfirmar}
+              onChange={(e) => setSenhaConfirmar(e.target.value)}
+              autoComplete="new-password"
+            />
+          </FormCampo>
+          <p style={{
+            padding: '0 1.5rem',
+            fontSize: '0.78rem',
+            color: 'rgba(25,25,24,0.45)',
+            margin: '0',
+          }}>
+            Mínimo 8 caracteres, com número, maiúscula e minúscula.
+          </p>
+        </>
+      )}
+
       {erro && <p className="comentarios-status comentarios-erro">{erro}</p>}
+
       <FormAcoes>
         <div style={{ flex: 1 }}>
           <button type="button" className="btn-voltar" onClick={() => navigate('/perfil')}>
@@ -191,7 +280,7 @@ function EditarPerfil() {
             className="btn linha-form"
             disabled={!isFormValid || enviando}
           >
-            {enviando ? 'Salvando...' : 'Editar'}
+            {enviando ? 'Salvando...' : 'Salvar'}
           </button>
         </span>
         <div style={{ flex: 1 }} />
