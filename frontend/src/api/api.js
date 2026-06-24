@@ -62,5 +62,4 @@ async function createSong(data) {
   return axios.post(url + "/songs", data)
 }
 
-export default { createContact, login, register, getSongComments, createComment, getAlbums, createAlbum, uploadImage, getSongsOfAlbum, createSong }
-export default { createContact, login, register, getUser, updateUser, getSongComments, createComment, getAlbums, getSongsOfAlbum }
+export default { createContact, login, register, getSongComments, createComment, getAlbums, createAlbum, uploadImage, getSongsOfAlbum, createSong, getUser, updateUser}
