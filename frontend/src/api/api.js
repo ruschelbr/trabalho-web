@@ -7,6 +7,7 @@ function resolveImageUrl(imagePath) {
   if (!imagePath) return '/logo.jpg'
   if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath
   if (imagePath.startsWith('/uploads/')) return `${API_ORIGIN}${imagePath}`
+  if (imagePath.startsWith('uploads/')) return `${API_ORIGIN}/${imagePath}`
   return imagePath
 }
 
