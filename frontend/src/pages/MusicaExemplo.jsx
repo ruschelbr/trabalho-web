@@ -104,7 +104,7 @@ function MusicaExemplo() {
         <div className="musica-topo">
           <div className="musica-album">
             <img
-              src={musica?.Album?.cover}
+              src={api.resolveImageUrl(musica?.Album?.cover)}
               alt={musica?.Album?.name}
               className="musica-capa"
             />
@@ -147,7 +147,7 @@ function MusicaExemplo() {
             <div key={c.id} className="comentario-card">
               <div className="comentario-topo">
                 <img
-                  src={c.User?.profilePicture || "/logo.jpg"}
+                  src={api.resolveImageUrl(c.User?.profilePicture)}
                   alt={c.User?.name || "Usuário"}
                   className="comentario-foto"
                 />

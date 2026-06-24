@@ -75,8 +75,25 @@ async function getAlbums() {
   return axios.get(`${url}/albums`)
 }
 
+async function updateAlbum(albumId, data) {
+  const token = localStorage.getItem("token")
+  return axios.put(`${url}/albums/${albumId}`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+ 
+async function deleteAlbum(albumId) {
+  const token = localStorage.getItem("token")
+  return axios.delete(`${url}/albums/${albumId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
+
 async function createAlbum(data) {
-  return axios.post(`${url}/albums`, data)
+  const token = localStorage.getItem("token")
+  return axios.post(`${url}/albums`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }
 
 // songs
@@ -85,7 +102,10 @@ async function getSongsOfAlbum(albumId) {
 }
 
 async function createSong(data) {
-  return axios.post(`${url}/songs`, data)
+  const token = localStorage.getItem("token")
+  return axios.post(`${url}/songs`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
 }
 
 async function getSongById(id) {
@@ -107,4 +127,6 @@ export default {
   getSongsOfAlbum,
   createSong,
   getSongById,
+  updateAlbum,
+  deleteAlbum
 }

@@ -120,3 +120,28 @@ body {
         height: 130px;
     }
 }
+
+/* botoes admin */
+
+.album-admin-btns {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.album-admin-btn {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.album-admin-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}

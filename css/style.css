@@ -126,8 +126,6 @@ form label:not(.form-upload),
     box-sizing: border-box;
 }
 
-.linha-form {
-}
 
 .form-input:hover,
 .linha-form:hover {
