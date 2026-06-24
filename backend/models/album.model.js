@@ -9,7 +9,7 @@ Album.init(
     name: { type: DataTypes.STRING, allowNull: false },
     release: { type: DataTypes.STRING, allowNull: false },
     type: { type: DataTypes.STRING, allowNull: false },
-    cover: { type: DataTypes.STRING, allowNull: true },
+    cover: { type: DataTypes.TEXT, allowNull: true },
   },
   { sequelize, timestamps: true },
 )

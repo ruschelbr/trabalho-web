@@ -196,6 +196,7 @@ function MusicaExemplo() {
                   src={api.resolveImageUrl(c.User?.profilePicture)}
                   alt={c.User?.name || "Usuário"}
                   className="comentario-foto"
+                  onError={(e) => { e.target.onerror = null; e.target.src = '/logo.jpg' }}
                 />
                 <span className="comentario-nome">
                   {c.User?.name || "Usuário"}

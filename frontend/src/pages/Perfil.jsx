@@ -75,6 +75,7 @@ function Perfil() {
             src={api.resolveImageUrl(usuario?.profilePicture)}
             alt="foto de perfil"
             className="perfil-foto"
+            onError={(e) => { e.target.onerror = null; e.target.src = '/logo.jpg' }}
           />
         </div>
       </div>
