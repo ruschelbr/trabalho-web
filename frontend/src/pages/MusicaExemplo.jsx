@@ -8,8 +8,20 @@ const COMENTARIO_EXEMPLO = {
   User: { name: "Lincoln Fabrício", profilePicture: "/Lincoln.png" },
 }
 
+function sortComentarios(lista) {
+  return [...lista].sort((a, b) => {
+    if (a.pinnedAt && b.pinnedAt) return new Date(a.pinnedAt) - new Date(b.pinnedAt)
+    if (a.pinnedAt) return -1
+    if (b.pinnedAt) return 1
+    return new Date(b.createdAt) - new Date(a.createdAt)
+  })
+}
+
 function MusicaExemplo() {
   const { id } = useParams()
+
+  const isAdmin = localStorage.getItem("admin") === "true"
+  const token = localStorage.getItem("token")
 
   const [musica, setMusica] = useState(null)
   const [comentarios, setComentarios] = useState([])
@@ -19,6 +31,8 @@ function MusicaExemplo() {
   const [texto, setTexto] = useState("")
   const [enviando, setEnviando] = useState(false)
   const [erroEnvio, setErroEnvio] = useState(null)
+  const [comentarioParaDeletar, setComentarioParaDeletar] = useState(null)
+  const [erroPin, setErroPin] = useState(null)
 
   useEffect(() => {
     let ativo = true
@@ -58,6 +72,35 @@ function MusicaExemplo() {
     const id = new URL(url).searchParams.get("v")
     return `https://www.youtube.com/embed/${id}`
   }
+  async function confirmarDelete() {
+    try {
+      await api.deleteComment(comentarioParaDeletar, token)
+      setComentarios((atuais) => atuais.filter((c) => c.id !== comentarioParaDeletar))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setComentarioParaDeletar(null)
+    }
+  }
+
+  async function handlePin(commentId, pinnedAt) {
+    setErroPin(null)
+    try {
+      const res = await api.pinComment(commentId, token)
+      setComentarios((atuais) =>
+        sortComentarios(
+          atuais.map((c) =>
+            c.id === commentId ? { ...c, pinnedAt: res.data.pinnedAt } : c,
+          ),
+        ),
+      )
+    } catch (error) {
+      console.log(error)
+      const msg = error.response?.data?.message || "Erro ao fixar comentário."
+      setErroPin(`[${error.response?.status}] ${msg}`)
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     if (!texto.trim()) return
@@ -136,6 +179,9 @@ function MusicaExemplo() {
           {erroBusca && (
             <p className="comentarios-status comentarios-erro">{erroBusca}</p>
           )}
+          {erroPin && (
+            <p className="comentarios-status comentarios-erro">{erroPin}</p>
+          )}
 
           {comentarios.length === 0 && (
             <p className="comentarios-status">
@@ -144,7 +190,7 @@ function MusicaExemplo() {
           )}
 
           {comentarios.map((c) => (
-            <div key={c.id} className="comentario-card">
+            <div key={c.id} className={`comentario-card${c.pinnedAt ? " comentario-card-fixado" : ""}`}>
               <div className="comentario-topo">
                 <img
                   src={c.User?.profilePicture || "/logo.jpg"}
@@ -154,6 +200,27 @@ function MusicaExemplo() {
                 <span className="comentario-nome">
                   {c.User?.name || "Usuário"}
                 </span>
+                {c.pinnedAt && (
+                  <span className="comentario-pin-badge" title="Comentário fixado">📌</span>
+                )}
+                {isAdmin && (
+                  <div className="comentario-admin-acoes">
+                    <button
+                      className={`btn-admin-pin${c.pinnedAt ? " ativo" : ""}`}
+                      onClick={() => handlePin(c.id, c.pinnedAt)}
+                      title={c.pinnedAt ? "Desafixar" : "Fixar"}
+                    >
+                      📌
+                    </button>
+                    <button
+                      className="btn-admin-deletar"
+                      onClick={() => setComentarioParaDeletar(c.id)}
+                      title="Excluir comentário"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                )}
               </div>
               <p className="comentario-texto">{c.text}</p>
             </div>
@@ -183,6 +250,18 @@ function MusicaExemplo() {
           </form>
         </section>
       </section>
+
+      {comentarioParaDeletar && (
+        <div className="modal-overlay">
+          <div className="modal-caixa inter">
+            <p>Deseja remover o comentário?</p>
+            <div className="modal-botoes">
+              <button type="button" className="btn-modal-sim" onClick={confirmarDelete}>SIM</button>
+              <button type="button" className="btn-modal-nao" onClick={() => setComentarioParaDeletar(null)}>NÃO</button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

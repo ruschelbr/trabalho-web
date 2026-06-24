@@ -45,8 +45,17 @@ async function findById(request, response) {
   }
 }
 
+const emojiRegex = /\p{Extended_Pictographic}/u
+
 async function update(request, response) {
   try {
+    if (request.body.name && emojiRegex.test(request.body.name)) {
+      const user = await model.findByPk(request.UserId)
+      if (!user?.admin) {
+        return response.status(403).json({ message: 'Apenas o admin pode usar emojis no nome.' })
+      }
+    }
+
     const success = await model.update(
       {
         name: request.body.name,

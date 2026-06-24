@@ -78,6 +78,13 @@ function EditarPerfil() {
     }
 
     setErro(null)
+
+    const isAdmin = localStorage.getItem('admin') === 'true'
+    if (/\p{Extended_Pictographic}/u.test(form.nome) && !isAdmin) {
+      setErro('Apenas o admin pode usar emojis no nome.')
+      return
+    }
+
     setEnviando(true)
 
     try {

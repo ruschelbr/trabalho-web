@@ -128,6 +128,43 @@ body {
     font-size: 0.9rem;
 }
 
+.comentario-card-fixado {
+    border-left: 3px solid #FCE829;
+}
+
+.comentario-pin-badge {
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+.comentario-admin-acoes {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.btn-admin-pin,
+.btn-admin-deletar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    opacity: 0.3;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: opacity 0.15s;
+    line-height: 1;
+}
+
+.btn-admin-pin:hover,
+.btn-admin-deletar:hover {
+    opacity: 1;
+}
+
+.btn-admin-pin.ativo {
+    opacity: 1;
+}
+
 .comentario-texto {
     margin: 0;
     font-size: 0.9rem;
