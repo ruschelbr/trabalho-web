@@ -86,6 +86,10 @@ body {
     column-count: 2;
     column-gap: 40px;
 }
+
+.album-tracklist a {
+  text-decoration: none;
+}
  
 .tracklist-escuro {
     color: #191918;
