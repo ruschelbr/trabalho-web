@@ -1,93 +1,16 @@
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import api from "../api/api.js"
+// import '../../css/discografia.css'
 
-const albuns = [
-  {
-    id: 1,
-    bloco: 'bloco-claro',
-    linha: 'linha-azul',
-    capaPrimeiro: true,
-    capa: '/Albun1.png',
-    capaAlt: 'Welcome to the Magic Room',
-    titulo: 'Welcome to the Magic Room',
-    tituloClasse: 'titulo-azul',
-    tracklistClasse: 'tracklist-escuro',
-    faixas: [
-      'Intro',
-      { label: 'X-Ray Riff Machine', to: '/musica-exemplo' },
-      'Feel Sorry',
-      'The lady is Going Down',
-      'Call to Bolster',
-      'Duofellow (Common Madness on Demand)',
-      'Running to Say Goodbye',
-      'Recnac',
-      'Nobody Knows',
-      'Me myself – Bonus Track',
-    ],
-  },
-  {
-    id: 2,
-    bloco: 'bloco-escuro',
-    linha: 'linha-amarela',
-    capaPrimeiro: false,
-    capa: '/Albun2.png',
-    capaAlt: 'Lost, Now Found',
-    titulo: 'Lost, Now Found',
-    tituloClasse: 'titulo-amarelo',
-    tracklistClasse: 'tracklist-claro',
-    faixas: [
-      'Lost, Now Found',
-      'Tatto',
-      'Here Comes the Moon Again',
-      'A Snapshot in Time',
-      'Too Much Nothing',
-      'All I Need',
-      'Can You Hear Me?',
-      'You Were Playing with Both',
-      'Schadenfreude',
-      'Wishes Can Come True',
-      'Super Bowie (I Make You Make)',
-      "C'mon, C'mon",
-      'You Tell Me',
-      'Attitude is Everything',
-      'Cahuenga Pass Breakdown',
-      'Tatto Live at the Whiskey',
-    ],
-  },
-  {
-    id: 3,
-    bloco: 'bloco-claro',
-    linha: 'linha-azul',
-    capaPrimeiro: true,
-    capa: '/Albun3.png',
-    capaAlt: 'Still Night Blue',
-    titulo: 'Still Night Blue',
-    tituloClasse: 'titulo-azul',
-    tracklistClasse: 'tracklist-escuro',
-    faixas: [
-      'Goal',
-      "Nothing's More Complete",
-      'Morning Light',
-      'Mr. Wellness',
-      'Peep Toe',
-      'Are you serious?',
-      'Still Night Blue',
-      'Breathless',
-      'Trolling',
-      'Crying Walls',
-      'Love & War',
-      'The Best Mistake of My Life',
-    ],
-  },
-]
-
-function Faixa({ faixa }) {
-  if (typeof faixa === 'string') {
-    return <li>{faixa}</li>
-  }
+function Faixa({ faixa, tracklistClasse }) {
   return (
     <li>
-      <Link to={faixa.to} className="texto-escuro">
-        {faixa.label}
+      <Link
+        to={`/musica/${encodeURIComponent(faixa.name)}`}
+        className={tracklistClasse}
+      >
+        {faixa.name}
       </Link>
     </li>
   )
@@ -101,32 +24,52 @@ function Capa({ src, alt }) {
   )
 }
 
-function InfoAlbum({ album }) {
+function InfoAlbum({ album, tracklistClasse, tituloClasse }) {
   return (
     <div className="album-info">
-      <h2 className={`album-titulo ${album.tituloClasse}`}>{album.titulo}</h2>
-      <ol className={`album-tracklist ${album.tracklistClasse}`}>
-        {album.faixas.map((faixa, i) => (
-          <Faixa key={i} faixa={faixa} />
+      <h2 className={`album-titulo ${tituloClasse}`}>{album.name}</h2>
+      <ol className={`album-tracklist ${tracklistClasse}`}>
+        {album.faixas.map((faixa) => (
+          <Faixa
+            key={faixa.id}
+            faixa={faixa}
+            tracklistClasse={tracklistClasse}
+          />
         ))}
       </ol>
     </div>
   )
 }
 
-function BlocoAlbum({ album }) {
+function BlocoAlbum({ album, index }) {
+  const isClaro = index % 2 === 0
+
+  const bloco = isClaro ? "bloco-claro" : "bloco-escuro"
+  const linha = isClaro ? "linha-azul" : "linha-amarela"
+  const tituloClasse = isClaro ? "titulo-azul" : "titulo-amarelo"
+  const tracklistClasse = isClaro ? "tracklist-escuro" : "tracklist-claro"
+  const capaPrimeiro = isClaro
+
   return (
-    <div className={`bloco-album ${album.bloco}`}>
-      <div className={`linha-lateral ${album.linha}`} />
-      {album.capaPrimeiro ? (
+    <div className={`bloco-album ${bloco}`}>
+      <div className={`linha-lateral ${linha}`} />
+      {capaPrimeiro ? (
         <>
-          <Capa src={album.capa} alt={album.capaAlt} />
-          <InfoAlbum album={album} />
+          <Capa src={album.cover} alt={album.name} />
+          <InfoAlbum
+            album={album}
+            tituloClasse={tituloClasse}
+            tracklistClasse={tracklistClasse}
+          />
         </>
       ) : (
         <>
-          <InfoAlbum album={album} />
-          <Capa src={album.capa} alt={album.capaAlt} />
+          <InfoAlbum
+            album={album}
+            tituloClasse={tituloClasse}
+            tracklistClasse={tracklistClasse}
+          />
+          <Capa src={album.cover} alt={album.name} />
         </>
       )}
     </div>
@@ -134,10 +77,35 @@ function BlocoAlbum({ album }) {
 }
 
 function Discografia() {
+  const [albuns, setAlbuns] = useState([])
+
+  useEffect(() => {
+    async function carregarDados() {
+      try {
+        const { data: albumsData } = await api.getAlbums()
+        console.log("álbuns:", albumsData)
+
+        const albumsComFaixas = await Promise.all(
+          albumsData.map(async (album) => {
+            const { data: songs } = await api.getSongsOfAlbum(album.id)
+            console.log(`músicas do álbum ${album.id}:`, songs)
+            return { ...album, faixas: songs }
+          }),
+        )
+
+        setAlbuns(albumsComFaixas)
+      } catch (error) {
+        console.error("erro ao carregar dados:", error)
+      }
+    }
+
+    carregarDados()
+  }, [])
+
   return (
     <>
-      {albuns.map((album) => (
-        <BlocoAlbum key={album.id} album={album} />
+      {albuns.map((album, index) => (
+        <BlocoAlbum key={album.id} album={album} index={index} />
       ))}
     </>
   )

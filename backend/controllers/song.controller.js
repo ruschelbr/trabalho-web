@@ -75,7 +75,7 @@ async function findSongsOfAlbum(request, response) { //método que deve ser cham
 //de mostrar
 
     try {
-        const result = await model.findAll({ where: { albumId: request.params.albumId } })
+        const result = await model.findAll({ where: { AlbumId: request.params.albumId } })
         if (result == null) {
             response.status(404).send()
         }

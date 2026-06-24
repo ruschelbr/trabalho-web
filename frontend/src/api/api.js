@@ -36,8 +36,8 @@ async function getAlbums(){
 // pra cadastrar e editar o album tbm -- Pedro
 
 // songs
-async function getSongsOfAlbum(){
-  return axios.get(url + "/albums/:albumId/songs")
+async function getSongsOfAlbum(albumId){
+  return axios.get(`${url}/albums/${albumId}/songs`)
 }
 
 export default { createContact, login, register, getSongComments, createComment, getAlbums, getSongsOfAlbum }
