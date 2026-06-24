@@ -155,16 +155,16 @@ function CadastrarAlbum() {
       )}
 
       <FormAcoes>
-        <span className="btn-wrapper">
+        <div style={{ flex: 1 }}>
           <button
             type="button"
-            className="btn linha-form"
-            style={{ opacity: 0.6 }}
+            className="btn-sair"
+            style={{ backgroundColor: '#191918' }}
             onClick={() => navigate(-1)}
           >
             Cancelar
           </button>
-        </span>
+        </div>
         <span className="btn-wrapper">
           <button
             type="submit"
@@ -176,6 +176,7 @@ function CadastrarAlbum() {
               : modoEdicao ? 'Salvar Alterações' : 'Criar Álbum'}
           </button>
         </span>
+        <div style={{ flex: 1 }} />
       </FormAcoes>
     </FormPagina>
   )

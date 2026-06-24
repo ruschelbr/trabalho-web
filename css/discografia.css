@@ -102,6 +102,10 @@ body {
 .bloco-album:first-of-type {
     margin-top: 0;
 }
+
+.bloco-album:first-of-type .album-admin-btns {
+    top: 2rem;
+}
  
 @media (max-width: 768px) {
     .bloco-album {

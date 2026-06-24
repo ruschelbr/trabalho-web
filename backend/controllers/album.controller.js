@@ -2,7 +2,7 @@ import model from "../models/album.model.js"
 
 async function findAll(request, response) {
   try {
-    const results = await model.findAll()
+    const results = await model.findAll({ order: [['id', 'ASC']] })
     response.json(results).status(200)
   } catch (error) {
     console.log(error)
