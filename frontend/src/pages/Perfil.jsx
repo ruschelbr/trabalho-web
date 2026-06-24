@@ -70,7 +70,7 @@ function Perfil() {
           <>
             <div className="form-campo">
               <img
-                src={usuario.profilePicture || '/logo.jpg'}
+                src={api.resolveImageUrl(usuario.profilePicture)}
                 alt="foto-perfil"
                 className="img-perfil"
               />

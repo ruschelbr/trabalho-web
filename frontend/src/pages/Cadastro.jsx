@@ -7,6 +7,7 @@ function Cadastro() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ nome: '', email: '', senha: '', album: '' })
   const [albuns, setAlbuns] = useState([])
+  const [fotoArquivo, setFotoArquivo] = useState(null)
   const [erro, setErro] = useState(null)
   const [enviando, setEnviando] = useState(false)
 
@@ -27,17 +28,28 @@ function Cadastro() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
+  function handleFotoChange(e) {
+    const file = e.target.files?.[0]
+    if (file) setFotoArquivo(file)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setErro(null)
     setEnviando(true)
 
     try {
+      let profilePicture = '/logo.jpg'
+      if (fotoArquivo) {
+        const uploadRes = await api.uploadImage(fotoArquivo)
+        profilePicture = uploadRes.data.path
+      }
+
       const payload = {
         name: form.nome,
         email: form.email,
         password: form.senha,
-        profilePicture: '/logo.jpg',
+        profilePicture,
       }
 
       if (form.album) {
@@ -116,7 +128,13 @@ function Cadastro() {
           ))}
         </select>
       </FormCampo>
-      <FormUpload id="perfil-cadastro" name="perfil" label="Foto de perfil:" />
+      <FormUpload
+        id="perfil-cadastro"
+        name="perfil"
+        label="Foto de perfil:"
+        onChange={handleFotoChange}
+        fileName={fotoArquivo?.name}
+      />
       {erro && <p className="comentarios-status comentarios-erro">{erro}</p>}
       <FormAcoes>
         <span className="btn-wrapper">

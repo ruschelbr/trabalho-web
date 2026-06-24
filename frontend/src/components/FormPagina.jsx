@@ -37,13 +37,20 @@ function FormAcoes({ children }) {
   return <div className="form-acoes">{children}</div>
 }
 
-function FormUpload({ id, name, label }) {
+function FormUpload({ id, name, label, onChange, fileName }) {
   return (
     <div className="form-campo">
       {label && <span className="texto-escuro form-upload-label">{label}</span>}
-      <input type="file" name={name} id={id} className="d-none" />
+      <input
+        type="file"
+        name={name}
+        id={id}
+        className="d-none"
+        accept="image/*"
+        onChange={onChange}
+      />
       <label htmlFor={id} className="form-input linha-form form-upload">
-        Upload
+        {fileName || 'Upload'}
       </label>
     </div>
   )

@@ -1,6 +1,14 @@
 import axios from 'axios'
 
-const url = 'http://localhost:3000/api'
+const API_ORIGIN = 'http://localhost:3000'
+const url = `${API_ORIGIN}/api`
+
+function resolveImageUrl(imagePath) {
+  if (!imagePath) return '/logo.jpg'
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) return imagePath
+  if (imagePath.startsWith('/uploads/')) return `${API_ORIGIN}${imagePath}`
+  return imagePath
+}
 
 //contato
 async function createContact(contact) {
@@ -23,6 +31,12 @@ async function getUser(userId) {
 
 async function updateUser(userId, data) {
   return axios.put(`${url}/users/${userId}`, data)
+}
+
+async function uploadImage(file) {
+  const formData = new FormData()
+  formData.append('image', file)
+  return axios.post(`${url}/upload`, formData)
 }
 
 // comentarios
@@ -49,4 +63,16 @@ async function getSongsOfAlbum(){
   return axios.get(url + "/albums/:albumId/songs")
 }
 
-export default { createContact, login, register, getUser, updateUser, getSongComments, createComment, getAlbums, getSongsOfAlbum }
+export default {
+  createContact,
+  login,
+  register,
+  getUser,
+  updateUser,
+  uploadImage,
+  resolveImageUrl,
+  getSongComments,
+  createComment,
+  getAlbums,
+  getSongsOfAlbum,
+}
