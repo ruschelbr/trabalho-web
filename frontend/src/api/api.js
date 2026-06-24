@@ -21,6 +21,10 @@ async function getUser(userId) {
   return axios.get(`${url}/users/${userId}`)
 }
 
+async function updateUser(userId, data) {
+  return axios.put(`${url}/users/${userId}`, data)
+}
+
 // comentarios
 async function getSongComments(songId) {
   return axios.get(`${url}/songs/${songId}/comments`)
@@ -45,4 +49,4 @@ async function getSongsOfAlbum(){
   return axios.get(url + "/albums/:albumId/songs")
 }
 
-export default { createContact, login, register, getUser, getSongComments, createComment, getAlbums, getSongsOfAlbum }
+export default { createContact, login, register, getUser, updateUser, getSongComments, createComment, getAlbums, getSongsOfAlbum }
