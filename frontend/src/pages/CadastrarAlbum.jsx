@@ -60,15 +60,18 @@ function CadastrarAlbum() {
           onChange={handleChange}
         />
       </FormCampo>
-      <FormCampo label="Data de Lançamento:">
+      <FormCampo label="Ano de Lançamento:">
         <input
           type="text"
           name="data"
           id="data-album"
-          placeholder="DD/MM/YYYY"
           className="form-input linha-form"
           value={form.data}
-          onChange={handleChange}
+          maxLength={4}
+          onChange={(e) => {
+            const val = e.target.value.replace(/\D/g, '').slice(0, 4)
+            setForm({ ...form, data: val })
+          }}
         />
       </FormCampo>
       <FormCampo label="Tipo:">
